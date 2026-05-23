@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Didomi · Platform UI kit</title>
+<link rel="stylesheet" href="../../design-system/tokens/colors_and_type.css" />
+<style>
+  body { margin: 0; background: #EEF2F4; }
+  .app { display: grid; grid-template-columns: 248px 1fr; min-height: 960px; max-width: 1440px; margin: 0 auto; background: #F4F3F3; }
+
+  /* Sidebar */
+  .side { background: #04092D; color: #F4F3F3; padding: 24px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .side .brand { display:flex; align-items:center; gap: 10px; padding: 4px 8px 20px; }
+  .side .brand img { height: 22px; filter: invert(1) brightness(1.1); }
+  .side .section { font-size: 10px; font-weight: 600; color: rgba(244,243,243,0.45); letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 12px 6px; }
+  .nav-item { display:flex; align-items:center; gap: 10px; padding: 9px 12px; border-radius: 8px; color: rgba(244,243,243,0.75); font-size: 13.5px; font-weight: 500; cursor: pointer; }
+  .nav-item:hover { background: rgba(244,243,243,0.06); color: #F4F3F3; }
+  .nav-item.active { background: #465CEE; color:#fff; }
+  .nav-item .ico { width: 16px; height: 16px; display:grid; place-items:center; }
+  .nav-item .ico svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+  .side .spacer { flex: 1; }
+  .side .account { display:flex; gap: 10px; align-items: center; padding: 10px; border-radius: 10px; background: rgba(244,243,243,0.04); }
+  .side .account .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--didomi-gradient); }
+  .side .account .name { font-size: 13px; font-weight: 600; }
+  .side .account .org { font-size: 11px; color: rgba(244,243,243,0.55); }
+
+  /* Topbar */
+  .top { display:flex; justify-content: space-between; align-items: center; padding: 16px 32px; background: #fff; border-bottom: 1px solid var(--border); }
+  .top .crumbs { font-size: 13px; color: var(--fg-muted); }
+  .top .crumbs b { color: var(--fg); font-weight: 600; }
+  .top .search { flex: 1; max-width: 420px; margin: 0 32px; }
+  .search-input { display:flex; align-items:center; gap:8px; padding: 8px 12px; border-radius: 6px; background: #EEF2F4; font-size: 13px; color: var(--fg-muted); }
+  .top .tools { display:flex; gap: 12px; align-items: center; }
+  .icon-btn { width: 36px; height: 36px; border-radius: 50%; display:grid; place-items:center; border: 1px solid var(--border); background: #fff; cursor: pointer; }
+
+  /* Page */
+  .page { padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+  .page-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .page-head h1 { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; }
+  .page-head .sub { font-size: 14px; color: var(--fg-muted); margin-top: 6px; }
+
+  .btn { display:inline-flex; align-items:center; gap:8px; padding: 9px 16px; border-radius: 999px; font-weight:600; font-size: 13px; border: 1px solid transparent; cursor:pointer; text-decoration:none; }
+  .btn.primary { background:#465CEE; color:#fff; }
+  .btn.primary:hover { background:#1E22AE; }
+  .btn.ghost { background:#fff; color:#04092D; border-color: rgba(4,9,45,0.15); }
+
+  /* Metric row */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .metric { background:#fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .metric .lbl { font-size: 12px; color: var(--fg-muted); font-weight: 500; }
+  .metric .n { font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: -0.02em; line-height: 1; }
+  .metric .n small { font-size: 18px; color: var(--fg-muted); font-weight: 400; }
+  .metric .delta { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; width: fit-content; }
+  .delta.up { background: #AFEDDD; color: #06604A; }
+  .delta.down { background: #F3D3C0; color: #9A3819; }
+  .metric .spark { display:flex; align-items: flex-end; gap: 2px; height: 32px; margin-top: 4px; }
+  .metric .spark span { flex: 1; background: #DDE2FF; border-radius: 2px; }
+  .metric .spark span.hi { background: #465CEE; }
+
+  /* Chart + side card */
+  .row2 { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; }
+  .card { background:#fff; border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+  .card .helper { font-size: 12px; color: var(--fg-muted); margin-bottom: 20px; }
+  .chart { display:flex; align-items: flex-end; gap: 8px; height: 200px; padding-top: 12px; border-top: 1px dashed var(--divider); }
+  .chart .bar { flex: 1; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, #465CEE 0%, #92ADFF 100%); position: relative; }
+  .chart .bar.soft { background: #DDE2FF; }
+  .chart-x { display:flex; gap: 8px; margin-top: 8px; font-size: 11px; color: var(--fg-subtle); }
+  .chart-x span { flex: 1; text-align:center; }
+
+  /* Banner preview */
+  .banner-preview { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+  .banner-preview .browser { background: #EEF2F4; padding: 10px 14px; display:flex; align-items:center; gap: 8px; border-bottom: 1px solid var(--border); }
+  .banner-preview .browser .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--dd-slate-300); }
+  .banner-preview .browser .url { flex:1; margin: 0 12px; background: #fff; padding: 6px 12px; border-radius: 6px; font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); }
+  .banner-preview .stage { padding: 24px; background: linear-gradient(180deg, #F4F3F3 0%, #E6E9EC 100%); min-height: 260px; display: flex; align-items: flex-end; justify-content: center; position: relative; }
+  .banner-preview .site-bg { position: absolute; inset: 24px; background: #fff; border-radius: 8px; opacity: 0.65; }
+  .consent {
+    position: relative; z-index: 1; width: 100%; max-width: 520px;
+    background: #04092D; color:#F4F3F3; border-radius: 14px; padding: 20px;
+    display:flex; flex-direction: column; gap: 12px;
+    box-shadow: 0 20px 40px rgba(4,9,45,0.35);
+  }
+  .consent .t { font-size: 14px; font-weight: 600; }
+  .consent .p { font-size: 12px; color: rgba(244,243,243,0.75); line-height: 1.5; }
+  .consent .actions { display:flex; gap: 8px; margin-top: 4px; }
+  .consent .actions .btn { padding: 8px 14px; font-size: 12px; }
+  .consent .actions .btn.primary { background: #465CEE; color:#fff; }
+  .consent .actions .btn.outline { background: transparent; border: 1px solid rgba(244,243,243,0.3); color:#F4F3F3; }
+
+  /* Data table */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { text-align: left; font-weight: 600; color: var(--fg-muted); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  tbody td { padding: 14px; border-bottom: 1px solid var(--divider); vertical-align: middle; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #FAFBFB; }
+  .vendor { display:flex; align-items: center; gap: 10px; }
+  .vendor .mark { width: 28px; height: 28px; border-radius: 8px; background:#DDE2FF; color:#465CEE; display:grid; place-items:center; font-weight:700; font-size: 12px; }
+  .badge { padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 600; display:inline-flex; align-items:center; gap: 6px; }
+  .badge.ok { background:#AFEDDD; color:#06604A; }
+  .badge.warn { background:#F5E5AC; color:#8C6A00; }
+  .badge.off { background: rgba(4,9,45,0.08); color: var(--fg-muted); }
+  .badge .d { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="side">
+    <div class="brand"><img src="../../design-system/assets/logos/didomi-platform.svg" alt="Didomi Platform"/></div>
+    <div class="section">Workspace</div>
+    <div class="nav-item active"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg></span>Overview</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></span>Consent notices</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h3l3 9 6-18 3 9h3"/></svg></span>Analytics</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v6c0 5-4 8-8 8s-8-3-8-8V7z"/><path d="M9 12l2 2 4-4"/></svg></span>Vendors</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3-7 8-7s8 3 8 7"/></svg></span>Preferences</div>
+
+    <div class="section">Data</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span>Consent records</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>Events</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 4l6 16 2-8 8-2z"/></svg></span>Server-side tagging</div>
+
+    <div class="section">Admin</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v3M12 20v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M1 12h3M20 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>Settings</div>
+    <div class="nav-item"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16h.01M10 10a2 2 0 1 1 4 0c0 1-1 1.5-2 2.5"/></svg></span>Help & docs</div>
+
+    <div class="spacer"></div>
+    <div class="account">
+      <div class="avatar"></div>
+      <div>
+        <div class="name">Marine L.</div>
+        <div class="org">Acme Media Group</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main>
+    <div class="top">
+      <div class="crumbs">Workspace &nbsp;/&nbsp; <b>Overview</b></div>
+      <div class="search">
+        <div class="search-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          Search vendors, domains, purposes…
+        </div>
+      </div>
+      <div class="tools">
+        <button class="icon-btn" title="Notifications">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#04092D" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0"/></svg>
+        </button>
+        <a class="btn primary" href="#">Save & publish</a>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Property · didomi.eu</div>
+          <h1>Consent overview</h1>
+          <div class="sub">How your CMP has performed across all domains in the last 30 days.</div>
+        </div>
+        <div style="display:flex; gap: 10px;">
+          <button class="btn ghost">Last 30 days</button>
+          <button class="btn ghost">Export</button>
+          <button class="btn primary">+ New notice</button>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics">
+        <div class="metric">
+          <div class="lbl">Consent rate</div>
+          <div class="n">89.2<small>%</small></div>
+          <div class="delta up">▲ 4.1 pts vs prev.</div>
+          <div class="spark"><span style="height:40%"></span><span style="height:52%"></span><span style="height:48%"></span><span style="height:58%"></span><span style="height:70%"></span><span style="height:82%"></span><span class="hi" style="height:95%"></span></div>
+        </div>
+        <div class="metric">
+          <div class="lbl">Views</div>
+          <div class="n">12.4<small>M</small></div>
+          <div class="delta up">▲ 8.7%</div>
+          <div class="spark"><span style="height:62%"></span><span style="height:54%"></span><span style="height:66%"></span><span style="height:72%"></span><span style="height:80%"></span><span style="height:88%"></span><span class="hi" style="height:92%"></span></div>
+        </div>
+        <div class="metric">
+          <div class="lbl">Rejection rate</div>
+          <div class="n">6.4<small>%</small></div>
+          <div class="delta down">▼ 1.2 pts</div>
+          <div class="spark"><span style="height:80%"></span><span style="height:72%"></span><span style="height:64%"></span><span style="height:58%"></span><span style="height:52%"></span><span style="height:44%"></span><span class="hi" style="height:32%"></span></div>
+        </div>
+        <div class="metric">
+          <div class="lbl">Active vendors</div>
+          <div class="n">148</div>
+          <div class="delta up">▲ 3 added</div>
+          <div class="spark"><span style="height:50%"></span><span style="height:52%"></span><span style="height:55%"></span><span style="height:62%"></span><span style="height:68%"></span><span style="height:72%"></span><span class="hi" style="height:78%"></span></div>
+        </div>
+      </div>
+
+      <!-- Chart + banner preview -->
+      <div class="row2">
+        <div class="card">
+          <h3>Consent rate, 30-day trend</h3>
+          <div class="helper">Grouped by ISO week. Benchmark: industry median 72%.</div>
+          <div class="chart">
+            <div class="bar soft" style="height:44%"></div>
+            <div class="bar soft" style="height:52%"></div>
+            <div class="bar soft" style="height:48%"></div>
+            <div class="bar" style="height:58%"></div>
+            <div class="bar" style="height:68%"></div>
+            <div class="bar" style="height:72%"></div>
+            <div class="bar" style="height:80%"></div>
+            <div class="bar" style="height:85%"></div>
+            <div class="bar" style="height:88%"></div>
+            <div class="bar" style="height:92%"></div>
+          </div>
+          <div class="chart-x"><span>W40</span><span>W41</span><span>W42</span><span>W43</span><span>W44</span><span>W45</span><span>W46</span><span>W47</span><span>W48</span><span>W49</span></div>
+        </div>
+        <div class="card" style="padding: 20px;">
+          <h3>Banner preview · desktop</h3>
+          <div class="helper">didomi.eu · default notice · EN</div>
+          <div class="banner-preview">
+            <div class="browser">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+              <div class="url">https://didomi.eu</div>
+            </div>
+            <div class="stage">
+              <div class="site-bg"></div>
+              <div class="consent">
+                <div class="t">We value your privacy.</div>
+                <div class="p">We use cookies to personalize content, measure performance, and deliver relevant advertising. You can accept, reject, or manage your choices at any time.</div>
+                <div class="actions">
+                  <button class="btn primary">Accept all</button>
+                  <button class="btn outline">Reject all</button>
+                  <button class="btn outline">Customize</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card" style="padding: 0;">
+        <div style="display:flex; justify-content: space-between; align-items: center; padding: 20px 24px; border-bottom: 1px solid var(--border);">
+          <div>
+            <h3 style="margin-bottom: 2px;">Vendors</h3>
+            <div class="helper" style="margin:0;">148 active vendors across 9 purposes</div>
+          </div>
+          <div style="display:flex; gap: 10px;">
+            <button class="btn ghost">Filter</button>
+            <button class="btn ghost">Group by purpose</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Vendor</th><th>Purposes</th><th>Status</th><th>Consent rate</th><th>Rejections (30d)</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="vendor"><div class="mark">GA</div><div><div style="font-weight:600;">Google Analytics</div><div style="font-size:11px; color: var(--fg-muted);">IAB · Measurement</div></div></div></td>
+              <td>Analytics, Advertising</td>
+              <td><span class="badge ok"><span class="d"></span>Active</span></td>
+              <td>91.4%</td>
+              <td>412,901</td>
+              <td style="text-align:right;">⋯</td>
+            </tr>
+            <tr>
+              <td><div class="vendor"><div class="mark" style="background:#F9D4DA; color:#9A3819;">M</div><div><div style="font-weight:600;">Meta Pixel</div><div style="font-size:11px; color: var(--fg-muted);">Social · Advertising</div></div></div></td>
+              <td>Advertising, Personalization</td>
+              <td><span class="badge ok"><span class="d"></span>Active</span></td>
+              <td>84.2%</td>
+              <td>986,104</td>
+              <td style="text-align:right;">⋯</td>
+            </tr>
+            <tr>
+              <td><div class="vendor"><div class="mark" style="background:#AFEDDD; color:#06604A;">HS</div><div><div style="font-weight:600;">HubSpot</div><div style="font-size:11px; color: var(--fg-muted);">CRM · Marketing</div></div></div></td>
+              <td>Functional, Marketing</td>
+              <td><span class="badge warn"><span class="d"></span>Review</span></td>
+              <td>93.8%</td>
+              <td>74,220</td>
+              <td style="text-align:right;">⋯</td>
+            </tr>
+            <tr>
+              <td><div class="vendor"><div class="mark" style="background:#F5E5AC; color:#8C6A00;">C</div><div><div style="font-weight:600;">Criteo</div><div style="font-size:11px; color: var(--fg-muted);">IAB · Retargeting</div></div></div></td>
+              <td>Advertising</td>
+              <td><span class="badge off"><span class="d"></span>Paused</span></td>
+              <td> · </td>
+              <td> · </td>
+              <td style="text-align:right;">⋯</td>
+            </tr>
+            <tr>
+              <td><div class="vendor"><div class="mark">S</div><div><div style="font-weight:600;">Segment</div><div style="font-size:11px; color: var(--fg-muted);">CDP · Pipeline</div></div></div></td>
+              <td>Analytics, Personalization</td>
+              <td><span class="badge ok"><span class="d"></span>Active</span></td>
+              <td>89.0%</td>
+              <td>128,440</td>
+              <td style="text-align:right;">⋯</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+</body></html>

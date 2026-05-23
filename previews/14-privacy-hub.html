@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Privacy Hub widget · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .ph-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    padding-top: 16px;
+    align-items: start;
+  }
+  .ph-panel {
+    background: #F4F3F3;
+    border-radius: 16px;
+    padding: 24px;
+    min-height: 480px;
+    position: relative;
+  }
+  .ph-panel.dark { background: #04092D; color: #fff; }
+  .ph-panel .panel-label {
+    position: absolute;
+    top: 16px; left: 16px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.55);
+  }
+  .ph-panel.dark .panel-label { color: rgba(255,255,255,0.55); }
+
+  /* Privacy HUB icon · 70px circle, navy, inner gradient sheen, chevron top */
+  .ph-icon {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: radial-gradient(circle at 50% 90%, rgba(255,255,255,0.35) 0%, rgba(217,217,217,0) 60%), #04092D;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 12px 24px rgba(4,9,45,0.25);
+    cursor: pointer;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .ph-icon.is-hover {
+    width: 74px; height: 74px;
+    box-shadow: 0 16px 32px rgba(4,9,45,0.32);
+  }
+  .ph-icon .chev-up {
+    position: absolute; top: 9px; left: 50%; transform: translateX(-50%);
+    width: 15px; height: 15px; color: #fff;
+  }
+  .ph-icon .lock {
+    position: absolute; top: 26px; text-align: center;
+    font-family: Montserrat, sans-serif;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .ph-icon .lock .p { font-weight: 700; font-size: 11px; display: block; }
+  .ph-icon .lock .h { font-weight: 300; font-size: 12px; letter-spacing: 0.08em; display: block; }
+
+  /* Label pills */
+  .ph-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    height: 32px;
+    border-radius: 32px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 1.2;
+    background: #04092D;
+    color: #fff;
+    cursor: pointer;
+    transition: background 160ms ease, box-shadow 160ms ease, font-weight 0ms;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .ph-label.is-hover {
+    background: #465CEE;
+    font-weight: 700;
+    box-shadow: 0 7px 11px rgba(0,0,0,0.15);
+  }
+  .ph-label .chev-right {
+    width: 7px; height: 9px; color: #fff; opacity: 0.85;
+  }
+
+  /* Opened widget · stack of labels above the icon */
+  .ph-stack {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+    padding-bottom: 20px;
+  }
+  .ph-stack .ph-label {
+    background: #fff; color: #04092D;
+    font-weight: 700;
+    box-shadow: 0 7px 11px rgba(0,0,0,0.12);
+  }
+  .ph-stack .ph-label.is-hover {
+    background: #465CEE; color: #fff;
+  }
+
+  /* Closed (default) · only the icon is visible */
+  .ph-closed { display: flex; justify-content: flex-start; align-items: flex-end; min-height: 320px; padding-top: 200px; }
+
+  .ph-open {
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start;
+    min-height: 400px;
+    gap: 16px;
+  }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 40px;
+    padding: 20px 24px;
+    background: #F9FAFA;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #04092D;
+    margin-top: 16px;
+  }
+  .legend .k {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.6);
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  .label-states {
+    display: flex; flex-direction: column; gap: 12px; padding-top: 80px;
+  }
+  .state-cell { display: inline-flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+  .state-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.5);
+  }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Privacy Hub widget</div>
+    <div class="pv-meta">Floating privacy center for end-user sites</div>
+  </div>
+
+  <div class="ph-grid">
+
+    <!-- CLOSED -->
+    <div class="ph-panel">
+      <span class="panel-label">Closed · default</span>
+      <div class="ph-closed">
+        <div class="ph-icon">
+          <svg class="chev-up" viewBox="0 0 15 15" fill="none"><path d="M3.5 9.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lock">
+            <span class="p">Privacy</span>
+            <span class="h">HUB</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HOVER (icon only, slightly larger + deeper shadow) -->
+    <div class="ph-panel">
+      <span class="panel-label">Closed · hover</span>
+      <div class="ph-closed">
+        <div class="ph-icon is-hover">
+          <svg class="chev-up" viewBox="0 0 15 15" fill="none"><path d="M3.5 9.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lock">
+            <span class="p">Privacy</span>
+            <span class="h">HUB</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- OPEN · stack of labels + icon at bottom -->
+    <div class="ph-panel dark">
+      <span class="panel-label">Open · expanded</span>
+      <div class="ph-open">
+        <div class="ph-stack">
+          <span class="ph-label">Security</span>
+          <span class="ph-label">Legal notice</span>
+          <span class="ph-label">Terms of use</span>
+          <span class="ph-label">Privacy policy</span>
+          <span class="ph-label is-hover">Privacy Requests</span>
+          <span class="ph-label">Privacy center</span>
+          <span class="ph-label">My preferences</span>
+          <span class="ph-label">Consent choices</span>
+        </div>
+        <div class="ph-icon is-hover">
+          <svg class="chev-up" viewBox="0 0 15 15" fill="none" style="transform:rotate(180deg);"><path d="M3.5 9.5l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="lock">
+            <span class="p">Privacy</span>
+            <span class="h">HUB</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Label pill states -->
+  <div style="padding-top:24px;">
+    <div style="font-weight:700; font-size:13px; letter-spacing:0.04em; text-transform:uppercase; color:#04092D; margin-bottom:16px;">Label pill · states</div>
+    <div style="display:flex; gap:32px; flex-wrap:wrap;">
+      <div class="state-cell">
+        <span class="ph-label">Label</span>
+        <span class="state-label">Default · navy</span>
+      </div>
+      <div class="state-cell">
+        <span class="ph-label is-hover">Label
+          <svg class="chev-right" viewBox="0 0 7 9" fill="none"><path d="M2 2l3 2.5-3 2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="state-label">Hover · electric blue</span>
+      </div>
+      <div class="state-cell">
+        <span class="ph-label" style="background:#fff; color:#04092D; box-shadow:0 7px 11px rgba(0,0,0,0.12); font-weight:700;">Label</span>
+        <span class="state-label">On dark · white</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPEC -->
+  <div class="legend">
+    <div><span class="k">Icon</span>70&thinsp;px ⌀ · Dark Navy · inner radial sheen 35%</div>
+    <div><span class="k">Lockup</span>Montserrat Bold 11 · Light 12 · 0.08em</div>
+    <div><span class="k">Chevron</span>15&thinsp;px top · flips down on open</div>
+    <div><span class="k">Shadow</span>0 12 24 rgba(4,9,45,0.25)</div>
+    <div><span class="k">Label default</span>Navy · Montserrat Medium 13</div>
+    <div><span class="k">Label hover</span>Electric Blue · Bold · shadow lift</div>
+  </div>
+</div>
+</body></html>

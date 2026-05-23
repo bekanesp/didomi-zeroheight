@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Logo lockups · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .logo-tile {
+    position: relative;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    min-height: 180px;
+  }
+  .logo-tile.light { background: #F4F3F3; border: 1px solid var(--border); color: #04092D; }
+  .logo-tile.dark  { background: #04092D; color: #F4F3F3; }
+
+  .logo-label {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .logo-label .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.6);
+  }
+  .logo-tile.dark .logo-label .tag { color: rgba(244,243,243,0.7); }
+  .logo-label .file {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(4,9,45,0.45);
+  }
+  .logo-tile.dark .logo-label .file { color: rgba(244,243,243,0.5); }
+
+  .logo-stage {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 12px 0;
+  }
+  .logo-stage img { max-width: 70%; height: 44px; object-fit: contain; }
+  .logo-tile.hero .logo-stage img { height: 56px; }
+  .logo-tile.group .logo-stage img { height: 72px; }
+
+  .caption {
+    font-size: 12px;
+    line-height: 1.45;
+    color: rgba(4,9,45,0.7);
+  }
+  .logo-tile.dark .caption { color: rgba(244,243,243,0.7); }
+
+  .modes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .mode {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .mode .mode-title {
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #04092D;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mode .mode-title::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #465CEE;
+  }
+  .mode .example {
+    font-family: Montserrat, sans-serif;
+    font-size: 15px;
+    color: #04092D;
+    line-height: 1.4;
+  }
+  .mode .example em { font-style: italic; }
+  .mode .note { font-size: 12px; color: var(--fg-muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Logo lockups</div>
+    <div class="pv-meta">Primary · Group · Sub-brands · Light + dark</div>
+  </div>
+
+  <!-- DIDOMI PRIMARY -->
+  <div>
+    <div class="pv-meta" style="margin-bottom: 12px;">Didomi · primary wordmark</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="logo-tile light hero">
+        <div class="logo-label">
+          <span class="tag">Primary · on light</span>
+          <span class="file">didomi-dark.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/didomi-dark.svg" alt="Didomi" />
+        </div>
+        <div class="caption">Navy wordmark on off-white. Default for decks, documents, product UI.</div>
+      </div>
+      <div class="logo-tile dark hero">
+        <div class="logo-label">
+          <span class="tag">Reversed · on dark</span>
+          <span class="file">didomi-light.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/didomi-light.svg" alt="Didomi" />
+        </div>
+        <div class="caption">Off-white wordmark on navy. Used on dark hero panels and footers.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIDOMI GROUP -->
+  <div>
+    <div class="pv-meta" style="margin-bottom: 12px;">Didomi Group · umbrella lockup</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="logo-tile light group">
+        <div class="logo-label">
+          <span class="tag">Group · on light</span>
+          <span class="file">didomi-group-dark.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/didomi-group-dark.svg" alt="Didomi Group" />
+        </div>
+        <div class="caption">Corporate umbrella mark. Use when representing the full group entity (investor relations, corporate announcements, partner materials).</div>
+      </div>
+      <div class="logo-tile dark group">
+        <div class="logo-label">
+          <span class="tag">Group · on dark</span>
+          <span class="file">didomi-group-light.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/didomi-group-light.svg" alt="Didomi Group" />
+        </div>
+        <div class="caption">Reversed group mark for navy surfaces.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADDINGWELL -->
+  <div>
+    <div class="pv-meta" style="margin-bottom: 12px;">Addingwell · sub-brand</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="logo-tile light">
+        <div class="logo-label">
+          <span class="tag">Addingwell · on light</span>
+          <span class="file">addingwell-dark.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/addingwell-dark.svg" alt="Addingwell" />
+        </div>
+        <div class="caption">Server-side tagging platform. Use on Addingwell-led surfaces once parent brand is established.</div>
+      </div>
+      <div class="logo-tile dark">
+        <div class="logo-label">
+          <span class="tag">Addingwell · on dark</span>
+          <span class="file">addingwell-light.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/addingwell-light.svg" alt="Addingwell" />
+        </div>
+        <div class="caption">Reversed Addingwell wordmark for navy surfaces.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOURCEPOINT -->
+  <div>
+    <div class="pv-meta" style="margin-bottom: 12px;">Sourcepoint · sub-brand</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+      <div class="logo-tile light">
+        <div class="logo-label">
+          <span class="tag">Sourcepoint · on light</span>
+          <span class="file">sourcepoint-dark.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/sourcepoint-dark.svg" alt="Sourcepoint" />
+        </div>
+        <div class="caption">Privacy and consent at scale. Used in-product and on Sourcepoint-led surfaces.</div>
+      </div>
+      <div class="logo-tile dark">
+        <div class="logo-label">
+          <span class="tag">Sourcepoint · on dark</span>
+          <span class="file">sourcepoint-light.svg</span>
+        </div>
+        <div class="logo-stage">
+          <img src="../design-system/assets/logos/sourcepoint-light.svg" alt="Sourcepoint" />
+        </div>
+        <div class="caption">Reversed Sourcepoint wordmark for navy surfaces.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citation rule: text vs logo -->
+  <div>
+    <div class="pv-meta" style="margin-bottom: 12px;">Citing a sub-brand · two allowed modes</div>
+    <div class="modes">
+      <div class="mode">
+        <div class="mode-title">In running text</div>
+        <div class="example">"<em>Addingwell by Didomi</em> is the server-side tagging platform."</div>
+        <div class="note">Italicise <em>by</em>; it never takes the capital. Use when typography is the hero and a logo would be visual noise.</div>
+      </div>
+      <div class="mode">
+        <div class="mode-title">As a logo / lockup</div>
+        <div class="example">Place the artwork from the library. Never re-typeset the mark.</div>
+        <div class="note">Use on hero panels, product UI, and anywhere branding is the anchor. Pair with clear space of at least the mark's x-height.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding: 16px 20px; background:#F9FAFA; border:1px solid var(--border); border-radius: 12px; color: var(--fg-muted); font-size: 12px; line-height: 1.5;">
+    The <b>D</b> in Didomi is always capitalised. Sub-brand lockups read <span class="mono">Addingwell&nbsp;by&nbsp;Didomi</span> and <span class="mono">Sourcepoint&nbsp;by&nbsp;Didomi</span>, with lowercase <em>by</em> baked into the artwork. Preserve the SVGs; never re-typeset the wordmark.
+  </div>
+</div>
+</body></html>

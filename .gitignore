@@ -1,0 +1,9 @@
+node_modules/
+out/
+.DS_Store
+*.log
+# Local secrets — Zeroheight tokens, etc.
+.env
+.env.local
+# Never commit raw bundle dumps
+/tmp_bundle/

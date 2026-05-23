@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Didomi · slide gallery</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<style>
+  body { padding: 64px 80px; max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: var(--fs-h1); margin-bottom: 8px; }
+  .lead { font-size: var(--fs-body-lg); color: var(--fg-muted); margin-bottom: 48px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+  .card {
+    display: block;
+    padding: 24px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: var(--fg);
+    transition: border-color 140ms ease, transform 140ms ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card h3 { font-size: var(--fs-h4); margin-bottom: 8px; }
+  .card p  { font-size: var(--fs-body-sm); color: var(--fg-muted); }
+  .group-label {
+    font-family: var(--font-sans);
+    font-size: var(--fs-caption);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--fg-subtle);
+    margin: 48px 0 16px;
+  }
+</style>
+</head>
+<body>
+  <h1>Didomi · Slide Gallery</h1>
+  <p class="lead">The 8 canonical slide templates plus a set of blank layout
+  variants and the design-system component previews.</p>
+
+  <div class="group-label">Production templates</div>
+  <div class="grid">
+    <a class="card" href="templates.html">
+      <h3>8 reference slides</h3>
+      <p>Cover · Agenda · Stat callout · Section header · Split intro · Stats + navy card · Three-up · Closing</p>
+    </a>
+    <a class="card" href="blank-layouts.html">
+      <h3>Blank layouts</h3>
+      <p>Variant grids you can drop content into without rebuilding from scratch.</p>
+    </a>
+  </div>
+
+  <div class="group-label">Design-system foundations</div>
+  <div class="grid">
+    <a class="card" href="../previews/01-core-palette.html"><h3>01 · Core palette</h3><p>Brand colors and the rules behind them.</p></a>
+    <a class="card" href="../previews/02-functional-dataviz.html"><h3>02 · Functional + data-viz</h3><p>Tints used in tables, charts, dashboards.</p></a>
+    <a class="card" href="../previews/03-type-specimen.html"><h3>03 · Type specimen</h3><p>Montserrat type scale + weights.</p></a>
+    <a class="card" href="../previews/04-buttons-inputs.html"><h3>04 · Buttons + inputs</h3><p>Form primitives.</p></a>
+    <a class="card" href="../previews/05-logos.html"><h3>05 · Logos</h3><p>Didomi · Didomi Group · Sourcepoint · Addingwell.</p></a>
+    <a class="card" href="../previews/06-brand-gradient.html"><h3>06 · Brand gradient</h3><p>The signature blurred gradient and its constraints.</p></a>
+    <a class="card" href="../previews/07-cards-radius.html"><h3>07 · Cards + radius</h3><p>Card surfaces and the radius scale.</p></a>
+    <a class="card" href="../previews/08-iconography.html"><h3>08 · Iconography</h3><p>Lucide outline style.</p></a>
+    <a class="card" href="../previews/10-voice.html"><h3>10 · Voice</h3><p>Brand voice and tone do/don'ts.</p></a>
+    <a class="card" href="../previews/11-buttons.html"><h3>11 · Buttons (extended)</h3><p>Every button variant in one place.</p></a>
+    <a class="card" href="../previews/12-navigation-items.html"><h3>12 · Navigation</h3><p>Header + nav patterns.</p></a>
+    <a class="card" href="../previews/13-tooltip.html"><h3>13 · Tooltip</h3><p>Tooltip behavior + styling.</p></a>
+    <a class="card" href="../previews/14-privacy-hub.html"><h3>14 · Privacy hub</h3><p>End-user privacy hub patterns.</p></a>
+    <a class="card" href="../previews/15-illustration-style.html"><h3>15 · Illustration style</h3><p>The illustration set and how to use it.</p></a>
+  </div>
+
+  <div class="group-label">UI kits</div>
+  <div class="grid">
+    <a class="card" href="../ui-kits/platform/index.html"><h3>Platform UI kit</h3><p>In-product layout patterns.</p></a>
+    <a class="card" href="../ui-kits/marketing-site/index.html"><h3>Marketing site UI kit</h3><p>Public-site sections.</p></a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Didomi · slide templates</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<script src="deck-stage.js"></script>
+<style>
+  html, body { margin: 0; background: #000; }
+  deck-stage { font-family: var(--font-sans); }
+
+  /* ─────────────────────────────────────────────
+     FRAME GRID (from reference slides)
+     Canvas: 1920 × 1080
+     Outer frame: 100px sides, 80px top, 80px bottom
+     Logo strip: top-left corner, wordmark ~110px wide × 26px tall
+     "Section title" marker: 14px, 60% opacity, divided by 1px rule
+  ───────────────────────────────────────────── */
+  section {
+    padding: 80px 100px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  section > * { position: relative; z-index: 1; }
+
+  .bg-offwhite { background: #F4F3F3; color: #04092D; }
+  .bg-navy     { background: #04092D; color: #F4F3F3; }
+
+  /* Logo bar ---- small, top-left */
+  .logo-bar {
+    position: absolute; top: 80px; left: 100px;
+    display: flex; align-items: center; gap: 18px;
+    z-index: 5;
+  }
+  .logo-bar img { height: 26px; display: block; }
+  .logo-bar .div { width: 1px; height: 20px; background: rgba(4,9,45,0.25); }
+  .bg-navy .logo-bar .div { background: rgba(244,243,243,0.25); }
+  .logo-bar .sec {
+    font-size: 14px; font-weight: 400;
+    color: rgba(4,9,45,0.55);
+    letter-spacing: 0;
+  }
+  .bg-navy .logo-bar .sec { color: rgba(244,243,243,0.55); }
+
+  /* ─────────────────────────────────────────────
+     GRADIENT ACCENT
+     Grainy, corner-anchored, partially off-canvas.
+     Uses patterns/blur.svg noise for grain overlay.
+  ───────────────────────────────────────────── */
+  .grad {
+    position: absolute; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.85) 0%, rgba(70,92,238,0) 72%),
+      radial-gradient(55% 55% at 75% 25%, rgba(255,133,154,0.80) 0%, rgba(255,133,154,0) 66%);
+  }
+  /* Grain overlay · ONLY for online media (web, social). DO NOT use on slide templates. */
+  .grain {
+    position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.7 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.12; mix-blend-mode: overlay;
+    display: none;               /* disabled for slides to preserve PDF export quality */
+  }
+
+  /* ─────────────────────────────────────────────
+     TYPOGRAPHY · matches reference
+     Display size for big titles: Bold 96–108px on content slides;
+     "Agenda"-style word on section intro uses Regular 180px
+     Body serif/sans: Montserrat 22–26, 1.45 line-height
+  ───────────────────────────────────────────── */
+  h1,h2,h3,h4,p,ul,li,blockquote { margin: 0; padding: 0; }
+  .h-display { font-family: var(--font-display); font-weight: 700; font-size: 100px; line-height: 1.02; letter-spacing: -0.02em; }
+  .h-display em { font-style: normal; font-weight: 700; }
+  .h-section { font-family: var(--font-display); font-weight: 400; font-size: 180px; line-height: 1; letter-spacing: -0.02em; }
+  .sub { font-size: 30px; line-height: 1.35; font-weight: 400; }
+  .body { font-size: 22px; line-height: 1.5; font-weight: 400; color: rgba(4,9,45,0.72); }
+  .bg-navy .body { color: rgba(244,243,243,0.75); }
+
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(4,9,45,0.55); }
+  .bg-navy .eyebrow { color: rgba(244,243,243,0.55); }
+
+  /* Outline numerals: 1, 2, 3 in hairline outline */
+  .numeral {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 120px;
+    line-height: 1;
+    -webkit-text-stroke: 1.5px currentColor;
+    color: transparent;
+    letter-spacing: -0.02em;
+    opacity: 0.85;
+  }
+
+  /* ─────────────────────────────────────────────
+     01 COVER · navy, gradient accent bottom-right, off-canvas
+  ───────────────────────────────────────────── */
+  .cover { justify-content: flex-end; min-height: 1080px; padding-bottom: 240px; }
+  .cover .grad { width: 900px; height: 700px; right: -200px; bottom: -200px; }
+  .cover h1 { font-family: var(--font-display); font-weight: 700; font-size: 80px; line-height: 1.05; letter-spacing: -0.02em; color: #F4F3F3; max-width: 1200px; }
+  .cover .sub { font-size: 28px; color: rgba(244,243,243,0.8); margin-top: 16px; }
+
+  /* ─────────────────────────────────────────────
+     02 SECTION INTRO / AGENDA · navy, big "Agenda" script, items on right
+  ───────────────────────────────────────────── */
+  .agenda { display: grid; grid-template-columns: 1fr 1fr; gap: 120px; align-items: center; min-height: 1080px; }
+  .agenda .grad { width: 700px; height: 700px; left: -200px; bottom: -280px; }
+  .agenda .word { font-family: var(--font-display); font-weight: 300; font-size: 170px; line-height: 1; letter-spacing: -0.02em; color: #F4F3F3; }
+  .agenda .items { display: flex; flex-direction: column; gap: 48px; }
+  .agenda .item { display: grid; grid-template-columns: 110px 1fr; gap: 24px; align-items: center; }
+  .agenda .item .numeral {
+    color: #F4F3F3;
+    opacity: 1;
+    font-weight: 300;               /* Montserrat Light */
+    -webkit-text-stroke: 0;         /* solid fill, not outline */
+    align-self: center;
+    text-align: center;
+  }
+  .agenda .item h3 { font-size: 38px; font-weight: 600; letter-spacing: -0.01em; color: #F4F3F3; }
+  .agenda .item p { font-size: 20px; color: rgba(244,243,243,0.7); margin-top: 8px; line-height: 1.4; }
+
+  /* ─────────────────────────────────────────────
+     03 STAT / CALLOUT · navy, dramatic stat with outline art on right
+     (the "20% use an ad blocker" reference)
+  ───────────────────────────────────────────── */
+  .stat-slide { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; min-height: 1080px; }
+  .stat-slide .grad { width: 600px; height: 520px; left: -200px; bottom: -200px; }
+  .stat-slide .text { font-family: var(--font-display); font-weight: 400; font-size: 54px; line-height: 1.2; letter-spacing: -0.01em; color: #F4F3F3; }
+  .stat-slide .text b { font-weight: 700; color: #F4F3F3; }
+  .stat-slide .grid-vis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; }
+  .stat-slide .hand { width: 100%; aspect-ratio: 1/1; opacity: 0.7; color: #F4F3F3; }
+  .stat-slide .hand.dim { opacity: 0.2; }
+
+  /* ─────────────────────────────────────────────
+     04 SECTION HEADER · navy, large gradient as center graphic,
+     big title + sub (the "Dead-end data" reference)
+  ───────────────────────────────────────────── */
+  .section-hd { justify-content: center; align-items: center; min-height: 1080px; text-align: center; }
+  .section-hd .grad { width: 1100px; height: 800px; left: 50%; top: 50%; transform: translate(-50%, -40%); opacity: 0.9; }
+  .section-hd h2 { font-family: var(--font-display); font-weight: 700; font-size: 140px; line-height: 1; letter-spacing: -0.02em; color: #F4F3F3; }
+  .section-hd .sub { font-size: 30px; color: rgba(244,243,243,0.85); margin-top: 32px; max-width: 1100px; font-weight: 400; }
+
+  /* ─────────────────────────────────────────────
+     05 SPLIT · offwhite, content left / image card right
+  ───────────────────────────────────────────── */
+  .split { display: grid; grid-template-columns: 1fr 700px; gap: 100px; align-items: center; min-height: 1080px; }
+  .split h2 { font-family: var(--font-display); font-weight: 700; font-size: 80px; line-height: 1.05; letter-spacing: -0.02em; }
+  .split .label { font-size: 30px; font-weight: 400; color: rgba(4,9,45,0.75); margin-top: 16px; }
+  .split .body { margin-top: 32px; max-width: 520px; }
+  .split .img {
+    width: 100%; aspect-ratio: 4/5; border-radius: 24px;
+    background:
+      url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&q=80') center/cover no-repeat,
+      #B8C8F0;
+  }
+
+  /* ─────────────────────────────────────────────
+     06 STATS + NAVY-CARD ACCENT · offwhite slide with
+     3 blue stats + a navy #202544 card with inner gradient
+     (the "DIDOMI GROUP" reference)
+  ───────────────────────────────────────────── */
+  .stats-slide { display: grid; grid-template-columns: 1fr 560px; gap: 100px; align-items: center; min-height: 1080px; }
+  .stats-slide .navy-card-wrap { position: relative; aspect-ratio: 1/1; }
+  .stats-slide .navy-card-wrap .grad.outer {
+    position: absolute; inset: -60px; width: auto; height: auto;
+    filter: blur(80px); opacity: 0.6; z-index: 0;
+  }
+  .stats-slide .navy-card-wrap .navy-card { position: relative; z-index: 1; }
+  .stats-slide .nums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 60px; }
+  .stats-slide .n  { font-family: var(--font-display); font-weight: 700; font-size: 84px; line-height: 1; color: #465CEE; letter-spacing: -0.02em; }
+  .stats-slide .h  { font-size: 17px; line-height: 1.45; color: rgba(4,9,45,0.75); margin-top: 16px; font-weight: 400; }
+  .stats-slide h4 { font-size: 20px; font-weight: 600; color: #04092D; margin-bottom: 24px; }
+  .stats-slide .logos-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px 24px; max-width: 520px; }
+  .stats-slide .logo-ph {
+    height: 28px; display: grid; place-items: center;
+    font-size: 12px; font-weight: 600;
+    color: rgba(4,9,45,0.55);
+    letter-spacing: 0.05em;
+  }
+  .navy-card {
+    position: relative; aspect-ratio: 1/1;
+    background: #202544; border-radius: 24px;
+    border: 1px solid rgba(4,9,45,0.08);
+    overflow: hidden;
+    display: grid; place-items: center;
+    box-shadow: 0 2px 4px rgba(4,9,45,0.08);
+  }
+  .navy-card .mark {
+    position: relative; z-index: 2; text-align: center; color: #F4F3F3;
+  }
+  .navy-card .mark .big { font-family: var(--font-display); font-weight: 700; font-size: 72px; letter-spacing: -0.02em; line-height: 1; }
+  .navy-card .mark .small { font-size: 30px; font-weight: 300; letter-spacing: 0.22em; margin-top: 8px; }
+  .navy-card .corner-br, .navy-card .corner-tl {
+    position: absolute; width: 40px; height: 40px;
+    border: 1px solid rgba(4,9,45,0.25);
+    z-index: 3;
+  }
+  .navy-card .corner-tl { top: -20px; left: -20px; border-right: 0; border-bottom: 0; }
+  .navy-card .corner-br { bottom: -20px; right: -20px; border-left: 0; border-top: 0; }
+
+  /* ─────────────────────────────────────────────
+     07 THREE-UP OFFWHITE · "It's time to opt for better" reference
+     Top-right gradient accent, 3 outline numerals + text columns
+  ───────────────────────────────────────────── */
+  .three-up { min-height: 1080px; }
+  .three-up .grad { width: 900px; height: 620px; right: -250px; top: -200px; opacity: 0.75; }
+  .three-up h2 { font-family: var(--font-display); font-weight: 400; font-size: 72px; line-height: 1.15; letter-spacing: -0.01em; margin-top: 80px; max-width: 1500px; }
+  .three-up h2 b { font-weight: 700; }
+  .three-up .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 80px; margin-top: 140px; }
+  .three-up .col .numeral { color: #465CEE; margin-bottom: 32px; opacity: 1; }
+  .three-up .col h3 { font-size: 34px; font-weight: 700; line-height: 1.1; letter-spacing: -0.01em; color: #04092D; }
+  .three-up .col p { margin-top: 16px; font-size: 20px; line-height: 1.45; color: rgba(4,9,45,0.72); font-weight: 400; }
+
+  /* ─────────────────────────────────────────────
+     08 CLOSING · offwhite, product mockup on right w/ gradient
+     ("Opt for better" reference)
+  ───────────────────────────────────────────── */
+  .closing { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; min-height: 1080px; }
+  .closing .grad { width: 800px; height: 620px; right: -200px; top: -100px; opacity: 0.7; }
+  .closing h2 { font-family: var(--font-display); font-weight: 400; font-size: 96px; line-height: 1; letter-spacing: -0.02em; }
+  .closing h2 b { font-weight: 700; }
+  .closing .sub { font-size: 34px; color: rgba(4,9,45,0.75); margin-top: 24px; max-width: 560px; font-weight: 400; line-height: 1.25; }
+  .closing .mock {
+    width: 100%; aspect-ratio: 4/3;
+    background: #fff; border-radius: 20px 0 0 20px;
+    border: 1px solid rgba(4,9,45,0.08); border-right: 0;
+    margin-right: -100px;       /* bleeds off-canvas like the reference */
+    box-shadow: 0 40px 80px rgba(4,9,45,0.12);
+    padding: 40px; display: flex; flex-direction: column; gap: 24px;
+  }
+  .closing .mock .topbar { display:flex; align-items:center; gap: 12px; font-size: 14px; font-weight: 600; }
+  .closing .mock .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .closing .mock .pill { background: #F7F8FA; border: 1px solid rgba(4,9,45,0.06); border-radius: 14px; padding: 14px; font-size: 12px; color: #04092D; }
+  .closing .mock .pill .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #65C997; margin-right: 8px; vertical-align: middle; }
+  .closing .mock .pill.w { background: #fff; }
+  .closing .mock .pill.y .dot { background: #F5C564; }
+  .closing .mock .pill.p .dot { background: #FF859A; }
+  .closing .mock .tile-row { display:grid; grid-template-columns: repeat(2, 1fr); gap: 16px; flex:1; }
+  .closing .mock .tile { background: #fff; border: 1px solid rgba(4,9,45,0.06); border-radius: 12px; padding: 16px; font-size: 11px; display: flex; flex-direction: column; gap: 10px; }
+  .closing .mock .tile .t { font-weight: 700; color: #04092D; font-size: 13px; }
+  .closing .mock .tile .d { color: rgba(4,9,45,0.6); line-height: 1.4; }
+  .closing .mock .tile .bar { height: 3px; background: #EDEFF2; border-radius: 2px; overflow: hidden; }
+  .closing .mock .tile .bar span { display: block; height: 100%; background: #465CEE; }
+
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 Cover -->
+  <section class="bg-navy cover" data-label="Cover · Navy">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <h1>Lorem ipsum dolor</h1>
+    <div class="sub">Lorem ipsum dolor</div>
+  </section>
+
+  <!-- 02 Agenda -->
+  <section class="bg-navy agenda" data-label="Agenda">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <div class="word">Agenda</div>
+    <div class="items">
+      <div class="item">
+        <div class="numeral">1</div>
+        <div>
+          <h3>Defend privacy</h3>
+          <p>Compliance made effortless everywhere.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="numeral">2</div>
+        <div>
+          <h3>Drive performance</h3>
+          <p>Turn compliant consent into real business results.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="numeral">3</div>
+        <div>
+          <h3>Deliver precision</h3>
+          <p>Eliminate dead-end data with clean, accurate, activation-ready signals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 Stat callout -->
+  <section class="bg-navy stat-slide" data-label="Stat callout">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <div class="text">
+      On average,<br/>
+      <b>20%</b> of people that<br/>
+      visit your website<br/>
+      use an <b>ad blocker</b>
+    </div>
+    <div class="grid-vis">
+      <!-- 25 hands, ~5 highlighted (20%) -->
+      <script>/* generated below */</script>
+      <!-- 5 columns × 5 rows = 25 -->
+      <template id="hand-tpl"></template>
+    </div>
+  </section>
+
+  <!-- 04 Section header -->
+  <section class="bg-navy section-hd" data-label="Section header">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <h2>Dead-end data</h2>
+    <div class="sub">All the data you can't act on because it's incomplete,<br/>inconsistent, or wasn't collected in a compliant way.</div>
+  </section>
+
+  <!-- 05 Split intro -->
+  <section class="bg-offwhite split" data-label="Split intro">
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div>
+      <div class="sec">Section title</div>
+    </div>
+    <div>
+      <h2>Introduction</h2>
+      <div class="label">What do we do?</div>
+      <p class="body">Didomi helps companies collect, respect, and activate user privacy preferences across every channel, so marketing, product, and legal teams can ship faster without trading off trust.</p>
+    </div>
+    <div class="img"></div>
+  </section>
+
+  <!-- 06 Stats + Navy card -->
+  <section class="bg-offwhite stats-slide" data-label="Stats + navy card">
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div>
+      <div class="sec">Proof</div>
+    </div>
+    <div>
+      <div class="nums">
+        <div>
+          <div class="n">99%</div>
+          <div class="h">Highest performing CMP on the market with a 99% consent string validity rate</div>
+        </div>
+        <div>
+          <div class="n">100+</div>
+          <div class="h">countries where we collect consent data</div>
+        </div>
+        <div>
+          <div class="n">2bn+</div>
+          <div class="h">consent data points collected each month</div>
+        </div>
+      </div>
+      <h4>Trusted by organizations around the world, including</h4>
+      <div class="logos-row">
+        <div class="logo-ph">MICHELIN</div>
+        <div class="logo-ph">orange</div>
+        <div class="logo-ph">DECATHLON</div>
+        <div class="logo-ph">DECATHLON</div>
+        <div class="logo-ph">DECATHLON</div>
+        <div class="logo-ph">PIERRE V.</div>
+        <div class="logo-ph">PSG</div>
+        <div class="logo-ph">Rakuten</div>
+        <div class="logo-ph">Rakuten</div>
+        <div class="logo-ph">Rakuten</div>
+      </div>
+    </div>
+    <!-- Gradient sits BEHIND the navy card as graphic accent, never inside it -->
+    <div class="navy-card-wrap">
+      <div class="grad outer"></div>
+      <div class="navy-card">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        <div class="mark">
+          <div class="big">DIDOMI</div>
+          <div class="small">GROUP</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 Three-up offwhite -->
+  <section class="bg-offwhite three-up" data-label="Three-up offwhite">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div>
+      <div class="sec">Why Didomi</div>
+    </div>
+    <h2>It's time to opt for <b>better.</b><br/>And that means you can:</h2>
+    <div class="cols">
+      <div class="col">
+        <div class="numeral">1</div>
+        <h3>Defend<br/>privacy</h3>
+        <p>anywhere across the globe, no matter how complex the regulations are</p>
+      </div>
+      <div class="col">
+        <div class="numeral">2</div>
+        <h3>Demand<br/>performance</h3>
+        <p>with more ways to safely capture data and turn it into real results</p>
+      </div>
+      <div class="col">
+        <div class="numeral">3</div>
+        <h3>Discover more<br/>possibilities</h3>
+        <p>with a responsive, consultative partner who always keeps you ahead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 Closing -->
+  <section class="bg-offwhite closing" data-label="Closing">
+    <div class="grad"></div><div class="grain"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+    </div>
+    <div>
+      <h2>Opt for <b>better</b></h2>
+      <div class="sub">How to get more performance out of your privacy data</div>
+    </div>
+    <div class="mock">
+      <div class="topbar">
+        <div style="width:24px;height:24px;border-radius:50%;background:#465CEE;"></div>
+        Hello Julien.V
+      </div>
+      <div class="cards">
+        <div class="pill"><span class="dot"></span>CMP · Active notices</div>
+        <div class="pill y"><span class="dot"></span>DSAR · New requests</div>
+        <div class="pill p"><span class="dot"></span>ACM · 2 Prep.</div>
+      </div>
+      <div class="tile-row">
+        <div class="tile"><div class="t">Prepare &amp; Configure</div><div class="d">Define the main aspect of your privacy governance with regard to data collection.</div><div class="bar"><span style="width:32%"></span></div></div>
+        <div class="tile"><div class="t">Design &amp; Publish</div><div class="d">Easily customize and deploy banners that drive higher opt-in rates.</div><div class="bar"><span style="width:80%"></span></div></div>
+        <div class="tile"><div class="t">Monitor &amp; Optimize</div><div class="d">Manage key privacy metrics and resolve incidents faster.</div><div class="bar"><span style="width:56%"></span></div></div>
+        <div class="tile"><div class="t">Marketplace</div><div class="d">Browse integrations with tools across your stack.</div><div class="bar"><span style="width:24%"></span></div></div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script>
+  // Populate the 5×5 hand grid for slide 3
+  (function () {
+    const slide = document.querySelector('.stat-slide .grid-vis');
+    if (!slide) return;
+    // 25 cells; 5 are highlighted (20%) · pattern scattered
+    const lit = new Set([0,3,7,11,20]);
+    for (let i = 0; i < 25; i++) {
+      const dim = !lit.has(i);
+      const svg =
+        `<svg class="hand ${dim?'dim':''}" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <!-- palm + four fingers + thumb, outline only -->
+          <path d="M30 62 V30 a6 6 0 0 1 12 0 V58"/>
+          <path d="M42 58 V22 a6 6 0 0 1 12 0 V58"/>
+          <path d="M54 58 V24 a6 6 0 0 1 12 0 V60"/>
+          <path d="M66 60 V32 a6 6 0 0 1 12 0 V68"/>
+          <path d="M30 50 q-6 -2 -10 6 l0 14 q0 14 10 22 q8 6 18 6 h10 q12 0 20 -10 l10 -22 V56 a5 5 0 0 0 -10 0"/>
+        </svg>`;
+      slide.insertAdjacentHTML('beforeend', svg);
+    }
+  })();
+</script>
+</body></html>

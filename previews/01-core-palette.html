@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Core palette · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .viz-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 6px 2px; }
+  .viz-dot {
+    width: 72px; height: 72px; border-radius: 50%;
+    border: 1px solid rgba(4,9,45,0.06);
+    margin-bottom: 10px;
+  }
+  .viz-name { font-weight: var(--fw-semibold); font-size: 14px; color: var(--fg); }
+  .viz-hex  { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em; color: var(--fg-muted); text-transform: uppercase; }
+  .viz-op   { font-size: 10px; color: var(--fg-subtle); letter-spacing: 0.04em; }
+
+  /* Surface-pair demo: two little cards showing the "card-on-surface" relationship */
+  .pair-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 4px; }
+  .pair-demo .surface {
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    display: flex; align-items: flex-end;
+    min-height: 132px;
+    position: relative;
+  }
+  .pair-demo .surface.light { background:#F4F3F3; }
+  .pair-demo .surface.dark  { background:#04092D; border-color: rgba(244,243,243,0.12); }
+  .pair-demo .card {
+    border-radius: 10px;
+    padding: 12px 14px;
+    flex: 1;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .pair-demo .surface.light .card { background:#FFFFFF; color:#04092D; }
+  .pair-demo .surface.dark  .card { background:#202544; color:#F4F3F3; }
+  .pair-demo .tag {
+    position: absolute; top: 14px; left: 16px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .pair-demo .surface.light .tag { color: rgba(4,9,45,0.5); }
+  .pair-demo .surface.dark  .tag { color: rgba(244,243,243,0.5); }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Core palette</div>
+    <div class="pv-meta">Surfaces · accents · data viz</div>
+  </div>
+
+  <!-- CORE SURFACES -->
+  <div>
+    <div class="section-label">Core surfaces</div>
+    <div class="pv-grid" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="swatch" style="background:#04092D; color:#F4F3F3; border-color: rgba(244,243,243,0.14);">
+        <div>
+          <div class="name">Dark Navy</div>
+          <div class="role">Primary dark background</div>
+        </div>
+        <div class="hex">#04092D</div>
+      </div>
+      <div class="swatch" style="background:#202544; color:#F4F3F3; border-color: rgba(244,243,243,0.14);">
+        <div>
+          <div class="name">Gray Navy</div>
+          <div class="role">Card surface on dark navy only</div>
+        </div>
+        <div class="hex">#202544</div>
+      </div>
+      <div class="swatch" style="background:#F4F3F3;">
+        <div>
+          <div class="name">Offwhite</div>
+          <div class="role">Primary light background</div>
+        </div>
+        <div class="hex">#F4F3F3</div>
+      </div>
+      <div class="swatch" style="background:#FFFFFF;">
+        <div>
+          <div class="name">White</div>
+          <div class="role">Card surface on offwhite</div>
+        </div>
+        <div class="hex">#FFFFFF</div>
+      </div>
+      <div class="swatch" style="background:#465CEE; color:#fff; border-color: rgba(255,255,255,0.2);">
+        <div>
+          <div class="name">Electric Blue</div>
+          <div class="role">Primary accent · CTAs, links</div>
+        </div>
+        <div class="hex">#465CEE</div>
+      </div>
+    </div>
+
+    <!-- Surface-pair demo -->
+    <div class="pair-demo">
+      <div class="surface light">
+        <div class="tag">Offwhite + White</div>
+        <div class="card">#FFFFFF card</div>
+      </div>
+      <div class="surface dark">
+        <div class="tag">Dark Navy + Gray Navy</div>
+        <div class="card">#202544 card</div>
+      </div>
+    </div>
+    <div style="margin-top: 10px; font-size: 11px; color: var(--fg-subtle); line-height: 1.55;">
+      Gray Navy pairs with Dark Navy the way White pairs with Offwhite · card on top of surface. Never use Gray Navy on light backgrounds.
+    </div>
+  </div>
+
+  <!-- ACCENT COLORS -->
+  <div>
+    <div class="section-label">Accent colors · rare</div>
+    <div class="pv-grid" style="grid-template-columns: repeat(2, 1fr);">
+      <div class="swatch" style="background:#92ADFF;">
+        <div>
+          <div class="name">Lilac</div>
+          <div class="role">Rare accent · subtitles, small highlights</div>
+        </div>
+        <div class="hex">#92ADFF</div>
+      </div>
+      <div class="swatch" style="background:#FF859A;">
+        <div>
+          <div class="name">Pink</div>
+          <div class="role">Rare accent · signature gradient companion</div>
+        </div>
+        <div class="hex">#FF859A</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA VIZUALIZATION -->
+  <div>
+    <div class="section-label">Data visualization · slidedecks, tables, charts</div>
+
+    <div style="font-size: 12px; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin-bottom: 10px;">Solid 100%</div>
+    <div class="pv-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="swatch" style="background:#08D8A6;">
+        <div><div class="name">Green</div><div class="role">Success · positive delta</div></div>
+        <div class="hex">#08D8A6</div>
+      </div>
+      <div class="swatch" style="background:#F2BE00;">
+        <div><div class="name">Yellow</div><div class="role">Warning · caution</div></div>
+        <div class="hex">#F2BE00</div>
+      </div>
+      <div class="swatch" style="background:#ED4D43; color:#fff; border-color: rgba(255,255,255,0.2);">
+        <div><div class="name">Red</div><div class="role">Error · negative delta</div></div>
+        <div class="hex">#ED4D43</div>
+      </div>
+    </div>
+
+    <div style="font-size: 12px; color: var(--fg-subtle); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; margin: 22px 0 10px;">Tints · 30% opacity on offwhite</div>
+    <div class="pv-grid" style="grid-template-columns: repeat(5, 1fr); gap: 20px;">
+      <div class="viz-tile">
+        <div class="viz-dot" style="background:#DEE6FF;"></div>
+        <div class="viz-name">Light lilac</div>
+        <div class="viz-hex">#DEE6FF</div>
+        <div class="viz-op">&nbsp;</div>
+      </div>
+      <div class="viz-tile">
+        <div class="viz-dot" style="background:rgba(255,133,154,0.30);"></div>
+        <div class="viz-name">Light pink</div>
+        <div class="viz-hex">#FF859A</div>
+        <div class="viz-op">30% opacity</div>
+      </div>
+      <div class="viz-tile">
+        <div class="viz-dot" style="background:rgba(8,216,166,0.30);"></div>
+        <div class="viz-name">Light green</div>
+        <div class="viz-hex">#08D8A6</div>
+        <div class="viz-op">30% opacity</div>
+      </div>
+      <div class="viz-tile">
+        <div class="viz-dot" style="background:rgba(242,190,0,0.30);"></div>
+        <div class="viz-name">Light yellow</div>
+        <div class="viz-hex">#F2BE00</div>
+        <div class="viz-op">30% opacity</div>
+      </div>
+      <div class="viz-tile">
+        <div class="viz-dot" style="background:rgba(237,77,67,0.30);"></div>
+        <div class="viz-name">Light red</div>
+        <div class="viz-hex">#ED4D43</div>
+        <div class="viz-op">30% opacity</div>
+      </div>
+    </div>
+    <div style="margin-top: 14px; font-size: 12px; color: var(--fg-subtle); line-height: 1.55;">
+      Green · Yellow · Red are reserved for data visualization and status signals. Pre-baked flat fills available as <span class="mono">--dd-viz-*-30</span> when opacity isn't supported.
+    </div>
+  </div>
+
+  <!-- IN CONTEXT -->
+  <div>
+    <div class="section-label">In context · the signature pairing</div>
+    <div style="position: relative; overflow: hidden; border-radius: 16px; padding: 48px; min-height: 220px; background:
+         radial-gradient(80% 90% at 100% 100%, rgba(255,133,154,0.55) 0%, rgba(255,133,154,0) 55%),
+         radial-gradient(70% 80% at 85% 115%, rgba(146,173,255,0.45) 0%, rgba(146,173,255,0) 60%),
+         #04092D;
+         color: #F4F3F3;">
+      <div style="font-family: var(--font-display); font-weight: 300; font-size: 36px; line-height: 1.15; letter-spacing: -0.01em; max-width: 560px;">Defend privacy.<br/>Demand performance.<br/>Discover more possibilities.</div>
+    </div>
+  </div>
+</div>
+</body></html>

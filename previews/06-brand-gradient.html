@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Brand gradient · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .section-title {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.55);
+    margin-bottom: 12px;
+  }
+  .section-title.on-dark { color: rgba(244,243,243,0.6); }
+
+  /* The headline rule, set as a banner at the top */
+  .rule-banner {
+    background: #04092D;
+    color: #fff;
+    border-radius: 16px;
+    padding: 22px 26px;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .rule-banner .blob-soft {
+    position: absolute;
+    width: 280px; height: 200px;
+    right: -60px; top: -60px;
+    border-radius: 50%;
+    filter: blur(50px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.95) 0%, rgba(70,92,238,0) 70%),
+      radial-gradient(60% 60% at 75% 25%, rgba(255,133,154,0.85) 0%, rgba(255,133,154,0) 65%);
+    pointer-events: none;
+    opacity: 0.85;
+  }
+  .rule-banner .copy { position: relative; z-index: 2; max-width: 640px; }
+  .rule-banner h3 {
+    margin: 0 0 6px 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.005em;
+  }
+  .rule-banner p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.78);
+  }
+  .rule-banner .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  /* Surfaces */
+  .bg-tile {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    min-height: 300px;
+    padding: 28px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .bg-tile.navy     { background: #04092D; color: #F4F3F3; }
+  .bg-tile.offwhite { background: #F4F3F3; color: #04092D; border: 1px solid rgba(4,9,45,0.08); }
+
+  /* Gradient blob · the actual asset. Elliptical, diffused, always sits on a solid bg. */
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    pointer-events: none;
+    mix-blend-mode: normal;
+  }
+  .blob.corner {
+    width: 300px; height: 200px;
+    right: -80px; bottom: -80px;
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.95) 0%, rgba(70,92,238,0) 70%),
+      radial-gradient(60% 60% at 75% 25%, rgba(255,133,154,0.9) 0%, rgba(255,133,154,0) 65%);
+    opacity: 0.95;
+  }
+  .blob.corner.soft-on-light { opacity: 0.75; }
+
+  .tile-content { position: relative; z-index: 2; }
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 320px;
+  }
+  .hero-sub {
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    max-width: 320px;
+    color: inherit;
+    opacity: 0.75;
+  }
+
+  /* Coverage: do vs don't */
+  .coverage {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .cov-tile {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    height: 180px;
+    background: #04092D;
+    padding: 12px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .cov-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(36px);
+    pointer-events: none;
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.95) 0%, rgba(70,92,238,0) 70%),
+      radial-gradient(60% 60% at 75% 25%, rgba(255,133,154,0.9) 0%, rgba(255,133,154,0) 65%);
+  }
+  .cov-blob.ok    { width: 140px; height: 110px; right: -30px; bottom: -30px; }
+  .cov-blob.limit { width: 190px; height: 150px; right: -30px; bottom: -30px; }
+  .cov-blob.over  { width: 320px; height: 260px; right: -30px; bottom: -30px; }
+  .cov-label {
+    position: relative; z-index: 2;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .cov-badge {
+    width: 18px; height: 18px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700;
+  }
+  .cov-badge.ok   { background: #08D8A6; color: #04092D; }
+  .cov-badge.warn { background: #F2BE00; color: #04092D; }
+  .cov-badge.no   { background: #ED4D43; color: #fff; }
+  .cov-note { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 4px; line-height: 1.4; position: relative; z-index: 2; }
+
+  /* Don't · grid of three: text, button, shape */
+  .dont-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .dont {
+    position: relative;
+    border-radius: 12px;
+    padding: 18px 16px 16px;
+    border: 1px solid rgba(237,77,67,0.25);
+    background: #FFF8F7;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .dont .stage {
+    height: 100px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #04092D;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Bad: gradient as text fill */
+  .bad-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: -0.01em;
+    background: linear-gradient(110deg, #465CEE 10%, #FF859A 70%, #92ADFF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* Bad: gradient as button fill */
+  .bad-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 999px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    background: linear-gradient(110deg, #465CEE 10%, #FF859A 90%);
+    border: 0;
+  }
+
+  /* Bad: gradient as shape fill */
+  .bad-shape {
+    width: 120px; height: 80px;
+    border-radius: 999px;
+    background: linear-gradient(110deg, #465CEE 10%, #FF859A 90%);
+  }
+
+  .cross {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(45deg, transparent 49%, rgba(237,77,67,0.92) 49%, rgba(237,77,67,0.92) 51%, transparent 51%),
+      linear-gradient(-45deg, transparent 49%, rgba(237,77,67,0.92) 49%, rgba(237,77,67,0.92) 51%, transparent 51%);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .dont-label {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 700; color: #ED4D43;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .dont-label::before {
+    content: "✕";
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #ED4D43; color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .dont-note {
+    font-size: 11px; color: rgba(4,9,45,0.7); line-height: 1.5;
+  }
+  .dont-note b { color: #04092D; font-weight: 700; }
+
+  .rules {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 20px 24px;
+    background: #F9FAFA;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #04092D;
+    line-height: 1.5;
+  }
+  .rules .k {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: rgba(4,9,45,0.6);
+    display: block; margin-bottom: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Brand gradient</div>
+    <div class="pv-meta">A background accent · nothing else</div>
+  </div>
+
+  <!-- Headline rule -->
+  <div class="rule-banner">
+    <div class="blob-soft"></div>
+    <div class="copy">
+      <span class="pill">Background-only</span>
+      <h3>The gradient is an added element on a background.</h3>
+      <p>Treat it like atmosphere · a soft, blurred accent on a navy or off-white surface. <b style="color:#fff;">Never use it as a fill</b> · not on text, not on buttons, not inside shapes, not as a body-copy background. Solid Electric Blue, Dark Navy and Off-white do all of that work.</p>
+    </div>
+  </div>
+
+  <!-- Correct usage · two surfaces -->
+  <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="bg-tile navy">
+      <div class="tile-content">
+        <div class="section-title on-dark">Correct · Dark Navy surface</div>
+      </div>
+      <div class="tile-content">
+        <div class="hero-title">Opt for better.</div>
+        <div class="hero-sub">Blob anchored in a corner · navy dominates, blue &amp; pink punctuate.</div>
+      </div>
+      <div class="blob corner"></div>
+    </div>
+
+    <div class="bg-tile offwhite">
+      <div class="tile-content">
+        <div class="section-title">Correct · Off-white surface</div>
+      </div>
+      <div class="tile-content">
+        <div class="hero-title">Opt for better.</div>
+        <div class="hero-sub">Same blob on #F4F3F3 · lower opacity, still corner-anchored.</div>
+      </div>
+      <div class="blob corner soft-on-light"></div>
+    </div>
+  </div>
+
+  <!-- Coverage -->
+  <div>
+    <div class="section-title">Coverage · max 30% of the surface</div>
+    <div class="coverage">
+      <div class="cov-tile">
+        <div class="cov-blob ok"></div>
+        <span class="cov-label"><span class="cov-badge ok">✓</span>~20% · Preferred</span>
+        <div class="cov-note">A quiet accent. Navy leads, gradient supports.</div>
+      </div>
+      <div class="cov-tile">
+        <div class="cov-blob limit"></div>
+        <span class="cov-label"><span class="cov-badge warn">!</span>~30% · Ceiling</span>
+        <div class="cov-note">The absolute maximum. Don't exceed this on hero moments.</div>
+      </div>
+      <div class="cov-tile">
+        <div class="cov-blob over"></div>
+        <span class="cov-label"><span class="cov-badge no">✕</span>&gt; 30% · Not allowed</span>
+        <div class="cov-note">Gradient becomes the background · it should never dominate.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Don'ts -->
+  <div>
+    <div class="section-title">Never use the gradient as a fill</div>
+    <div class="dont-grid">
+      <div class="dont">
+        <div class="stage">
+          <span class="bad-text">Better</span>
+          <div class="cross"></div>
+        </div>
+        <div class="dont-label">In type</div>
+        <div class="dont-note">Don't put the gradient on letters. Headlines are <b>solid Off-white on dark</b> or <b>Dark Navy on light</b>. Type carries meaning · keep it readable.</div>
+      </div>
+
+      <div class="dont">
+        <div class="stage">
+          <button class="bad-btn">Book a demo →</button>
+          <div class="cross"></div>
+        </div>
+        <div class="dont-label">On buttons</div>
+        <div class="dont-note">Primary CTAs are solid <b>Electric Blue&nbsp;#465CEE</b>. Buttons are crisp, decisive and consistent · the gradient never fills one.</div>
+      </div>
+
+      <div class="dont">
+        <div class="stage">
+          <div class="bad-shape"></div>
+          <div class="cross"></div>
+        </div>
+        <div class="dont-label">As shape fill</div>
+        <div class="dont-note">No gradient inside discs, pills, cards or accent shapes. The blob lives on the surface · soft and diffused · never contained by a hard edge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rules summary -->
+  <div class="rules">
+    <div><span class="k">Where it lives</span>As an <b>added element on the background</b> · navy or off-white surface only.</div>
+    <div><span class="k">Coverage</span>Up to <b>30%</b> of the surface · 20% preferred.</div>
+    <div><span class="k">Treatment</span>Corner-anchored · 40–60&thinsp;px blur · no hard edges, no opacity dropoff.</div>
+    <div><span class="k">Colours</span>Electric Blue <b>#465CEE</b> + Pink <b>#FF859A</b> · Lilac <b>#92ADFF</b> optional accent.</div>
+    <div><span class="k">Never on</span>Text · buttons · filled shapes · cards · inputs · icons.</div>
+    <div><span class="k">Use solid colour for</span>Primary CTAs · headlines · UI surfaces · accents on cards.</div>
+  </div>
+</div>
+</body></html>

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Illustration style · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  :root {
+    --ink: #04092D;
+    --blue: #465CEE;
+    --paper: #F4F3F3;
+    --sw: 1.25;  /* hairline weight */
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .intro .lede {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .intro .lede b { font-weight: 600; }
+  .rules {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--fg-muted);
+  }
+  .rules .r {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    align-items: start;
+  }
+  .rules .r::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ink);
+    margin-top: 7px;
+    margin-left: 2px;
+  }
+  .rules .r.blue::before { background: var(--blue); }
+  .rules b { color: var(--ink); font-weight: 600; }
+
+  /* Tokens row */
+  .tokens {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .token {
+    background: #FAFBFB;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .token .label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+    font-weight: 600;
+  }
+  .token .val {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .token .vis {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .token svg { overflow: visible; }
+
+  /* Tiles (shared · dark-mode inversion block) */
+  .tile {
+    background: var(--paper);
+    border: 1px solid rgba(4,9,45,0.06);
+    border-radius: 14px;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .tile svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .tile .cap {
+    position: absolute;
+    left: 14px; bottom: 12px;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .tile .sub {
+    position: absolute;
+    right: 14px; bottom: 12px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: rgba(4,9,45,0.5);
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+  }
+
+  /* Do / Don't */
+  .check {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  .check .box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .check .box.bad { border-color: rgba(237,77,67,0.3); }
+  .check .mark {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .check .mark.ok { color: #08D8A6; }
+  .check .mark.no { color: #ED4D43; }
+  .check .box .art {
+    background: var(--paper);
+    border-radius: 8px;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+  }
+  .check .box .art svg { width:100%; height:100%; display:block; }
+  .check .box .desc { font-size: 11px; line-height: 1.5; color: var(--fg-muted); }
+
+  .section-title {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-subtle);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  /* Construction diagram */
+  .construct {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: center;
+    background: #FAFBFB;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .construct .steps {
+    display: flex; flex-direction: column; gap: 12px;
+    font-size: 12px; color: var(--fg-muted); line-height: 1.55;
+  }
+  .construct .step { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  .construct .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .construct .step b { color: var(--ink); font-weight: 600; }
+  .construct .diagram {
+    aspect-ratio: 1 / 1;
+    background: var(--paper);
+    border-radius: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Illustration style</div>
+    <div class="pv-meta">Minimal · line · conceptual</div>
+  </div>
+
+  <!-- LEDE + RULES -->
+  <div class="intro">
+    <div class="lede">
+      Abstract geometry, not literal drawing. <b>A circle can mean a world, a customer, a product.</b> A line, a journey. A dot, a moment of attention.
+    </div>
+    <div class="rules">
+      <div class="r"><span><b>Minimal line-work.</b> Thin, uniform stroke. Navy on light, offwhite on dark. No fills, no gradients, no shadows.</span></div>
+      <div class="r"><span><b>Primitives only.</b> Circles, arcs, lines, curves, arrows, dots. Combine them to carry meaning.</span></div>
+      <div class="r"><span><b>Conceptual, not illustrative.</b> A cookie isn't a cookie drawing · it's a circle holding six dots. API isn't a server · it's a node fanning out.</span></div>
+      <div class="r blue"><span><b>1 to 3 blue accents · no more.</b> One blue dot is the default focal. Use two or three only when the concept genuinely needs them (paired states, a small set of waypoints). Beyond three, the accent stops accenting.</span></div>
+      <div class="r"><span><b>Centered composition.</b> Generous whitespace around the form. One primary shape, supporting dots.</span></div>
+      <div class="r"><span><b>No type inside artwork.</b> Meaning comes from the geometry and the caption beside it.</span></div>
+    </div>
+  </div>
+
+  <!-- TOKENS -->
+  <div>
+    <div class="section-title">Tokens</div>
+    <div class="tokens">
+      <div class="token">
+        <div class="label">Stroke</div>
+        <div class="vis"><svg width="140" height="40"><line x1="4" y1="20" x2="136" y2="20" stroke="var(--ink)" stroke-width="var(--sw)" stroke-linecap="round"/></svg></div>
+        <div class="val">1.25 px · uniform · round caps</div>
+      </div>
+      <div class="token">
+        <div class="label">Navy dot</div>
+        <div class="vis"><svg width="40" height="40"><circle cx="20" cy="20" r="5" fill="var(--ink)"/></svg></div>
+        <div class="val">#04092D · 5–10 px</div>
+      </div>
+      <div class="token">
+        <div class="label">Accent dot</div>
+        <div class="vis"><svg width="40" height="40"><circle cx="20" cy="20" r="5" fill="var(--blue)"/></svg></div>
+        <div class="val">#465CEE · focal · one per piece</div>
+      </div>
+      <div class="token">
+        <div class="label">Hollow node</div>
+        <div class="vis"><svg width="40" height="40"><circle cx="20" cy="20" r="7" fill="none" stroke="var(--ink)" stroke-width="var(--sw)"/></svg></div>
+        <div class="val">Outline · endpoints / waypoints</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONSTRUCTION -->
+  <div>
+    <div class="section-title">Construction · how to draw one</div>
+    <div class="construct">
+      <div class="steps">
+        <div class="step"><span class="num">01</span><span><b>State the concept in one word.</b> "Convergence", "routing", "orbit", "signal", "distribution".</span></div>
+        <div class="step"><span class="num">02</span><span><b>Pick the carrier form.</b> Circle = entity or scope. Line/arc = journey or relation. Arrow = direction. Dot = moment or actor.</span></div>
+        <div class="step"><span class="num">03</span><span><b>Repeat with rhythm.</b> Multiple arcs, multiple dots, a phase offset. The repetition is the message.</span></div>
+        <div class="step"><span class="num">04</span><span><b>Place 1–3 blue dots.</b> Default to one · the focal node. Add a second or third only when the concept needs paired or sequenced beats. Never more than three.</span></div>
+        <div class="step"><span class="num">05</span><span><b>Breathe.</b> ~20% margin on all sides. Centered. No clutter.</span></div>
+      </div>
+      <div class="diagram">
+        <svg viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+          <!-- step 1: concept = ORBIT -->
+          <!-- carrier: circle + arc around -->
+          <circle cx="100" cy="100" r="34" fill="none" stroke="var(--ink)" stroke-width="1.25"/>
+          <circle cx="100" cy="100" r="66" fill="none" stroke="var(--ink)" stroke-width="1.25" stroke-dasharray="0 0"/>
+          <!-- rhythm: orbit trail -->
+          <circle cx="100" cy="100" r="50" fill="none" stroke="var(--ink)" stroke-width="1.25" opacity="0.3"/>
+          <!-- navy dots -->
+          <circle cx="100" cy="34" r="3" fill="var(--ink)"/>
+          <circle cx="34" cy="100" r="3" fill="var(--ink)"/>
+          <!-- blue focal -->
+          <circle cx="166" cy="100" r="4" fill="var(--blue)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAMPLES -->
+  <div>
+    <div class="section-title">Examples · existing illustrations</div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+      <div class="tile"><img src="../design-system/assets/illustrations/Customization.svg" alt="Customization" style="width:100%; height:100%; display:block;"/><div class="cap">Customization</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/Integrations.svg"  alt="Integrations"  style="width:100%; height:100%; display:block;"/><div class="cap">Integrations</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/Calendar.svg"      alt="Calendar"      style="width:100%; height:100%; display:block;"/><div class="cap">Calendar</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/User guiding.svg"  alt="User guiding"  style="width:100%; height:100%; display:block;"/><div class="cap">User guiding</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/API.svg"           alt="API"           style="width:100%; height:100%; display:block;"/><div class="cap">API</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/Automation.svg"    alt="Automation"    style="width:100%; height:100%; display:block;"/><div class="cap">Automation</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/Legislations.svg"  alt="Legislations"  style="width:100%; height:100%; display:block;"/><div class="cap">Legislations</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/Launch.svg"        alt="Launch"        style="width:100%; height:100%; display:block;"/><div class="cap">Launch</div></div>
+      <div class="tile"><img src="../design-system/assets/illustrations/User preferences.svg" alt="User preferences" style="width:100%; height:100%; display:block;"/><div class="cap">User preferences</div></div>
+    </div>
+    <div style="margin-top: 10px; font-size: 11px; color: var(--fg-subtle); line-height: 1.55;">
+      Reference set · built from the rules above. Use as the visual benchmark when commissioning or producing new illustrations.
+    </div>
+  </div>
+
+  <!-- DO / DON'T -->
+  <div>
+    <div class="section-title">Do · don't</div>
+    <div class="check">
+      <div class="box">
+        <div class="mark ok">DO</div>
+        <div class="art">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="36" fill="none" stroke="#04092D" stroke-width="1.25"/>
+            <circle cx="96" cy="60" r="4" fill="#465CEE"/>
+            <circle cx="40" cy="50" r="3" fill="#04092D"/>
+            <circle cx="72" cy="50" r="3" fill="#04092D"/>
+            <circle cx="56" cy="74" r="3" fill="#04092D"/>
+          </svg>
+        </div>
+        <div class="desc">Primitives, hairline stroke, one blue dot as focal. (1–3 max.)</div>
+      </div>
+      <div class="box bad">
+        <div class="mark no">DON'T</div>
+        <div class="art">
+          <svg viewBox="0 0 120 120">
+            <defs>
+              <linearGradient id="bad1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#FF859A"/><stop offset="1" stop-color="#92ADFF"/>
+              </linearGradient>
+            </defs>
+            <circle cx="60" cy="60" r="40" fill="url(#bad1)"/>
+            <circle cx="60" cy="60" r="20" fill="#04092D"/>
+          </svg>
+        </div>
+        <div class="desc">No filled shapes, gradients, or heavy masses.</div>
+      </div>
+      <div class="box bad">
+        <div class="mark no">DON'T</div>
+        <div class="art">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="40" fill="none" stroke="#04092D" stroke-width="5"/>
+            <circle cx="60" cy="60" r="5" fill="#04092D"/>
+          </svg>
+        </div>
+        <div class="desc">No heavy strokes. Keep line thin and uniform.</div>
+      </div>
+      <div class="box bad">
+        <div class="mark no">DON'T</div>
+        <div class="art">
+          <svg viewBox="0 0 120 120">
+            <circle cx="34" cy="50" r="5" fill="#465CEE"/>
+            <circle cx="54" cy="42" r="5" fill="#465CEE"/>
+            <circle cx="74" cy="50" r="5" fill="#465CEE"/>
+            <circle cx="86" cy="68" r="5" fill="#465CEE"/>
+            <circle cx="46" cy="78" r="5" fill="#465CEE"/>
+            <circle cx="68" cy="84" r="5" fill="#465CEE"/>
+            <circle cx="60" cy="60" r="30" fill="none" stroke="#04092D" stroke-width="1.25"/>
+          </svg>
+        </div>
+        <div class="desc">More than 3 blue accents. Cap at 3 · blue earns attention by being rare.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INVERSION -->
+  <div>
+    <div class="section-title">On dark backgrounds</div>
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:14px;">
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Customization-dark.svg" alt="Customization" style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Customization</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Integrations-dark.svg"  alt="Integrations"  style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Integrations</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Calendar-dark.svg"      alt="Calendar"      style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Calendar</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/User guiding-dark.svg"  alt="User guiding"  style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">User guiding</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/API-dark.svg"           alt="API"           style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">API</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Automation-dark.svg"    alt="Automation"    style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Automation</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Legislations-dark.svg"  alt="Legislations"  style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Legislations</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/Launch-dark.svg"        alt="Launch"        style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">Launch</div></div>
+      <div class="tile" style="background:#04092D;"><img src="../design-system/assets/illustrations/User preferences-dark.svg" alt="User preferences" style="width:100%; height:100%; display:block;"/><div class="cap" style="color:#F4F3F3;">User preferences</div></div>
+    </div>
+    <div style="margin-top: 10px; font-size: 11px; color: var(--fg-subtle); line-height: 1.55;">
+      Invert: navy strokes and navy dots flip to <span class="mono">#F4F3F3</span>. The electric blue accent stays <span class="mono">#465CEE</span> on both surfaces.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

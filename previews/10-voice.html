@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Voice & copy · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  /* Section scaffolding */
+  .vc-section { display: flex; flex-direction: column; gap: 14px; }
+  .vc-h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.005em;
+    color: #04092D;
+    margin: 0;
+  }
+  .vc-h3 {
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: #1E22AE;
+    margin: 0;
+  }
+  .vc-lede {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: #455564;
+    max-width: 70ch;
+  }
+  .vc-lede b { color: #04092D; font-weight: 600; }
+
+  .vc-divider {
+    height: 1px;
+    background: rgba(4,9,45,0.08);
+    margin: 4px 0 0 0;
+  }
+
+  /* Do / Don't pair */
+  .vc-rule {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .vc-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .vc-card {
+    border-radius: 10px;
+    padding: 14px 16px 16px;
+    border: 1px solid var(--border);
+    background: #fff;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .vc-card.dont { border-color: rgba(237,77,67,0.18); background: #FFF8F7; }
+  .vc-card.do   { border-color: rgba(8,216,166,0.22); background: #F2FCF8; }
+  .vc-tag {
+    align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .vc-tag.dont { background: #FFD6D2; color: #04092D; }
+  .vc-tag.do   { background: #C7F2E2; color: #04092D; }
+  .vc-tag svg { width: 11px; height: 11px; }
+  .vc-quote {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #04092D;
+    white-space: pre-wrap;
+  }
+  .vc-quote.muted { color: #455564; }
+
+  /* Reminder / callout */
+  .vc-callout {
+    background: #FFF6E0;
+    border-left: 3px solid #F2BE00;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #04092D;
+  }
+  .vc-callout b { font-weight: 600; }
+
+  /* Mindset table */
+  .mindset {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 10px 24px;
+    align-items: start;
+  }
+  .mindset .label {
+    font-family: Montserrat, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #04092D;
+    padding-top: 2px;
+  }
+  .mindset .body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #455564;
+  }
+  .mindset .body b { color: #04092D; font-weight: 600; }
+
+  /* Wide list (used for lists with many small items) */
+  .vc-quote ul {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  .vc-quote ul li::before {
+    content: "·";
+    margin-right: 6px;
+    color: rgba(4,9,45,0.4);
+  }
+
+  /* Section header strip */
+  .vc-section-head {
+    display: flex; align-items: baseline; gap: 14px;
+    padding-top: 8px;
+  }
+  .vc-section-head .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(4,9,45,0.5);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Voice &amp; copy</div>
+    <div class="pv-meta">Enterprise · confident · measured</div>
+  </div>
+
+  <!-- ================================================== -->
+  <!-- 1. ENTERPRISE COMMUNICATION                         -->
+  <!-- ================================================== -->
+  <div class="vc-section">
+    <div class="vc-section-head"><span class="num">01</span><h2 class="vc-h2">Enterprise communication</h2></div>
+    <p class="vc-lede">
+      To capture Enterprise customers, we need to talk like an Enterprise company · with experience, consistency, and strength. Our core Didomi identity does not change · it is enhanced by <b>increased professionalism</b>, a <b>stronger image as a global player</b>, <b>clearer communication</b>, and <b>value-driven messaging</b>. We may be a tight-knit scale-up, but we live and breathe as an Enterprise company.
+    </p>
+
+    <!-- "We" identity -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">"We" identity</h3>
+      <p class="vc-lede" style="font-size:12.5px;">When talking to customers, prospects or partners, you represent the company and team as a whole. We are united and speak as one.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"I've put together the attached presentation for you."</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"We've prepared the attached presentation for you."
+or
+"Our team has prepared the attached presentation for you."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- The competition -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">The competition</h3>
+      <p class="vc-lede" style="font-size:12.5px;">We take the high road · educated stance, why Didomi makes sense for specific reasons and use cases. We don't beg for business. We focus on our strengths · we never outright criticize a competitor.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"OneTrust has bad UX, their product is impossible to understand."</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"OneTrust offers a full suite of security-related products and tools, which is a great offering for companies looking for that sort of solution.
+
+At Didomi, we focus on a more focused expertise around data privacy (…)"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Solutions over tool -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Solutions over tool</h3>
+      <p class="vc-lede" style="font-size:12.5px;">We solve problems · we deliver products <b>and</b> services. We are not "just" selling products. The value of our solutions is reflected in the quality of everything we do · and matches our pricing strategy.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"We sell a set of compliance tools."</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"We help Enterprise companies address their compliance and data privacy challenges with tech solutions and services catered to their needs."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Global -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Global is natural to us</h3>
+      <p class="vc-lede" style="font-size:12.5px;">We are a global business · collaborators in dozens of countries, products in 40+ languages, English as our base language. Don't highlight "global" as something special · it has the opposite effect and makes us appear local.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">Emphasize that we "even have employees in the US" or that we are "trying to expand to new markets outside of France/Europe".</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">· Reassure customers that we have customers and collaborators all over the world.
+· Be mindful of English grammar (see below).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Collective expertise -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Collective expertise</h3>
+      <p class="vc-lede" style="font-size:12.5px;">When we talk about our products, our industry or the future of data privacy, we speak with the collective intelligence of 150+ collaborators · legal, business, design, marketing, technology, product.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">Feel like you have to do everything by yourself, and suggest that to external stakeholders.</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">Leverage our internal resources to find any answer or clarification you need.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- A reassuring force -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">A reassuring force</h3>
+      <p class="vc-lede" style="font-size:12.5px;">We've gone through GDPR and a lot more since. Every Didomian relies on a solid network · so do our customers. On hot topics, we take a measured, objective approach.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">Use overly-dramatic storytelling to leverage fear and over-the-top claims:
+"CPRA non-compliance will kill your business, we can help you."</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">Focus on our strengths and provide reassurance based on facts and data:
+"Our multi-regulations feature helps customers comply with regulations all over the world, including California. Our team of experts is here to help with the challenges you may be facing ahead of CPRA enforcement."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================== -->
+  <!-- 2. GRAMMAR BEST PRACTICES                           -->
+  <!-- ================================================== -->
+  <div class="vc-section">
+    <div class="vc-section-head"><span class="num">02</span><h2 class="vc-h2">Grammar best practices</h2></div>
+    <p class="vc-lede">
+      As an Enterprise-level, global company, we <b>must</b> maintain an impeccable level of English in our external communication. Poor grammar makes us look sloppy, very local, and · simply put · unprofessional.
+    </p>
+
+    <div class="vc-callout">
+      ⚠ <b>Reminder.</b> You have access to native speakers and content professionals at Didomi. In doubt, reach out to a native English speaker on your team, or message Octavia Bermbach or Thierry Maout · they'll be happy to help.
+    </div>
+
+    <!-- American English -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Always use American English</h3>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">colour
+honour
+personalise, personalisation
+customise, customisation
+organise, organisation</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">color
+honor
+personalize, personalization
+customize, customization
+organize, organization</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Didomi capitalized -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">"Didomi" is always capitalized</h3>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">The didomi team is here to support you.</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">The Didomi team is here to support you.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Active voice -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Use active voice</h3>
+      <p class="vc-lede" style="font-size:12.5px;">Active voice makes content more engaging and breathable. The subject of the sentence does the action.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't · Passive</span>
+          <div class="vc-quote">"The PMP was bought by Romain."
+"The CMP was implemented by Orange."</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do · Active</span>
+          <div class="vc-quote">"Romain bought a PMP."
+"Orange implemented the CMP."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Spell out acronyms -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Always spell out acronyms the first time</h3>
+      <p class="vc-lede" style="font-size:12.5px;">Not all collaborators are as savvy with our daily acronyms. Spell out the full term at least once · then use the acronym safely.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"The CPRA will go live on (…)"</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"The California Privacy Rights Act (CPRA) will go live on (…)"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Product names -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Product words are capitalized · never translated</h3>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"La plateforme de gestion du consentement de didomi est une (…)"</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"La Consent Management Platform (CMP) de Didomi est une (…)"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Exclamation marks -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Use exclamation marks sparingly</h3>
+      <p class="vc-lede" style="font-size:12.5px;">Exclamation marks can be awkward. Never use several in a row ("!!!"). One or two maximum per article, email or message.</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">"Introducing our new Privacy Request Module!!!"</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">"Introducing our new Privacy Request Module."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Never plural -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Watch out for these words · never plural</h3>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">Performances
+Informations
+Consents
+Vendors when used in front of another noun (e.g. "vendors list")</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">Performance
+Information
+Consent
+Vendor list, vendor tracking, vendor report</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vc-divider"></div>
+
+    <!-- Apostrophes -->
+    <div class="vc-rule">
+      <h3 class="vc-h3">Apostrophes</h3>
+      <p class="vc-lede" style="font-size:12.5px;">Don't use an apostrophe when pluralizing an acronym, or with "Didomi + a noun".</p>
+      <div class="vc-pair">
+        <div class="vc-card dont">
+          <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</span>
+          <div class="vc-quote">Plural:
+· API's can be used …
+· Didomi CSM's are highly trained.
+
+Didomi:
+· Didomi's team is here to help.
+· Didomi's platform is the leading consent management solution on the market.</div>
+        </div>
+        <div class="vc-card do">
+          <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Do</span>
+          <div class="vc-quote">Plural:
+· APIs can be used …
+· Didomi CSMs are highly trained.
+
+Didomi:
+· The Didomi team is here to help.
+· The Didomi platform is the leading consent management solution on the market.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================== -->
+  <!-- 3. BRAND VOICE SAMPLES                              -->
+  <!-- ================================================== -->
+  <div class="vc-section">
+    <div class="vc-section-head"><span class="num">03</span><h2 class="vc-h2">Brand voice in action</h2></div>
+    <p class="vc-lede">A quick gut-check for headlines, taglines and short-form copy.</p>
+
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="vc-card do">
+        <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>On brand</span>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45;">Defend privacy. Demand performance. Discover more possibilities.</li>
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45;">2,500+ companies. 90% opt-in. 22% ROAS. One platform.</li>
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45;">Building the internet of trust.</li>
+        </ul>
+      </div>
+      <div class="vc-card dont">
+        <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Off brand</span>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45; color: var(--fg-muted); text-decoration: line-through;">Get started with our amazing privacy solution today!</li>
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45; color: var(--fg-muted); text-decoration: line-through;">Are you ready to take your consent to the next level?</li>
+          <li style="padding:10px 12px; background:#fff; border:1px solid var(--border); border-radius: 8px; font-size: 13.5px; line-height:1.45; color: var(--fg-muted); text-decoration: line-through;">Users love it 🎉</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================================================== -->
+  <!-- 4. NON-NEGOTIABLES                                  -->
+  <!-- ================================================== -->
+  <div class="vc-section">
+    <div class="vc-section-head"><span class="num">04</span><h2 class="vc-h2">Non-negotiables</h2></div>
+
+    <div style="padding: 18px 20px; border-radius: 10px; background: var(--bg-sunken); border: 1px solid var(--border);">
+      <div class="mindset">
+        <div class="label">No exclamation marks</div>
+        <div class="body">Sparingly · one or two max per article, email or message. Never "!!!".</div>
+
+        <div class="label">No emoji</div>
+        <div class="body">Not in headlines, not in body, not in CTAs. Brand voice is enterprise · meaning carries the tone, not pictograms.</div>
+
+        <div class="label">No rhetorical questions</div>
+        <div class="body">Headlines state, they don't ask. <i>"Are you ready to take your consent to the next level?"</i> · never.</div>
+
+        <div class="label">Never use the em-dash</div>
+        <div class="body">Replace with a period, a colon, or a middle dot (·). The em-dash reads as an AI tic.</div>
+
+        <div class="label">Numbers are concrete</div>
+        <div class="body">90%, 22%, 2,500+ · never adjectives. Avoid "amazing", "incredible", "leading" without proof.</div>
+
+        <div class="label">Verbs lead on CTAs</div>
+        <div class="body">"Book a demo", "Talk to sales", "View documentation" · not "Get started" or "Click here".</div>
+
+        <div class="label">"We", not "I"</div>
+        <div class="body">Always speak as the team. Customers buy a company, not a person.</div>
+
+        <div class="label">"Didomi" is capitalized</div>
+        <div class="body">Always · including in product copy, partner emails and decks.</div>
+
+        <div class="label">American English</div>
+        <div class="body">color, honor, organize, customize, personalize.</div>
+      </div>
+    </div>
+
+    <!-- Em-dash guard, kept from the existing card -->
+    <div class="vc-pair">
+      <div class="vc-card do">
+        <span class="vc-tag do"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Instead of em-dash</span>
+        <div class="vc-quote">Consent. Preferences. Data.
+Addingwell by Didomi: server-side tagging.
+Built to scale · across brands, regions, regulations.</div>
+      </div>
+      <div class="vc-card dont">
+        <span class="vc-tag dont"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>Avoid</span>
+        <div class="vc-quote muted" style="text-decoration: line-through;">Consent — preferences — data.
+Addingwell by Didomi — server-side tagging.
+Built to scale — across brands, regions, regulations.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>

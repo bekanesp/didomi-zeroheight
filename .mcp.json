@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "zeroheight": {
+      "command": "npx",
+      "args": ["-y", "@zeroheight/mcp-server@latest"],
+      "env": {
+        "ZEROHEIGHT_ACCESS_TOKEN": "${ZEROHEIGHT_ACCESS_TOKEN}",
+        "ZEROHEIGHT_CLIENT_ID": "${ZEROHEIGHT_CLIENT_ID}"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+[
+  { "slide": 1, "label": "Cover", "notes": "Open with your name + role. The cover background is intentionally calm — let it breathe for two seconds before you speak." },
+  { "slide": 2, "label": "Agenda", "notes": "Walk through the three pillars at pace. Don't dwell — this is a signpost, not the content." },
+  { "slide": 3, "label": "Stat callout", "notes": "Pause on the 20%. The 5 highlighted hands out of 25 are the point. Say the number out loud, then move on." },
+  { "slide": 4, "label": "Section header", "notes": "Transitional. Use it to reset the audience's attention before the substantive section that follows." },
+  { "slide": 5, "label": "Split intro", "notes": "First content slide on offwhite. Tone shifts from declarative to explanatory." },
+  { "slide": 6, "label": "Stats + navy card", "notes": "Three proof points. The navy card is decorative — don't read it." },
+  { "slide": 7, "label": "Three-up", "notes": "Three benefits in parallel. Read each title, paraphrase the body one line each." },
+  { "slide": 8, "label": "Closing", "notes": "CTA + screenshot. Land the call to action before transitioning to Q&A." }
+]

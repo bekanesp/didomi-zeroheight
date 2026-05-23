@@ -1,0 +1,13 @@
+{
+  "// description": "Drop-in MCP config for the Didomi Zeroheight design system. Paste this into Claude Code, Claude Desktop, Cursor, Windsurf, or any MCP-aware host. Replace the env values with your own zeroheight credentials (creation: https://developers.zeroheight.com/75fe5b2ed/p/6599ef-creation).",
+  "mcpServers": {
+    "zeroheight": {
+      "command": "npx",
+      "args": ["-y", "@zeroheight/mcp-server@latest"],
+      "env": {
+        "ZEROHEIGHT_ACCESS_TOKEN": "zhat_REPLACE_ME",
+        "ZEROHEIGHT_CLIENT_ID": "zhci_REPLACE_ME"
+      }
+    }
+  }
+}

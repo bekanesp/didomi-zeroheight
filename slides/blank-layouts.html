@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Didomi · blank slide layouts</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<script src="deck-stage.js"></script>
+<style>
+  html, body { margin: 0; background: #000; }
+  deck-stage { font-family: var(--font-sans); }
+
+  /* Shared frame.
+     Reserved safe zones:
+       · top 80–140px  = logo bar (26px logo + breathing room)
+       · bottom 40–88px = page number
+     Content lives between these, with extra breathing room. */
+  section { padding: 160px 100px 120px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+  section > * { position: relative; z-index: 1; }
+  .bg-offwhite { background: #F4F3F3; color: #04092D; }
+  .bg-navy     { background: #04092D; color: #F4F3F3; }
+
+  /* Logo bar */
+  .logo-bar { position: absolute; top: 80px; left: 100px; display: flex; align-items: center; gap: 18px; z-index: 5; }
+  .logo-bar img { height: 26px; display: block; }
+  .logo-bar .div { width: 1px; height: 20px; background: rgba(4,9,45,0.25); }
+  .bg-navy .logo-bar .div { background: rgba(244,243,243,0.25); }
+  .logo-bar .sec { font-size: 14px; font-weight: 400; color: rgba(4,9,45,0.55); }
+  .bg-navy .logo-bar .sec { color: rgba(244,243,243,0.55); }
+
+  .page-n { position: absolute; bottom: 56px; right: 100px; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.08em; color: rgba(4,9,45,0.5); z-index: 4; }
+  .bg-navy .page-n { color: rgba(244,243,243,0.4); }
+
+  /* Gradient accent · corner-anchored */
+  .grad {
+    position: absolute; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.85) 0%, rgba(70,92,238,0) 72%),
+      radial-gradient(55% 55% at 75% 25%, rgba(255,133,154,0.80) 0%, rgba(255,133,154,0) 66%);
+  }
+
+  /* Typography primitives */
+  h1,h2,h3,h4,p,ul,li,blockquote { margin: 0; padding: 0; }
+  .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(4,9,45,0.55); }
+  .bg-navy .eyebrow { color: rgba(244,243,243,0.55); }
+  .numeral {
+    font-family: var(--font-display); font-weight: 300; font-size: 120px;
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .numeral.outline {
+    -webkit-text-stroke: 1.5px currentColor; color: transparent;
+  }
+
+  /* Reusable block types */
+  .card { background: #fff; border: 1px solid rgba(4,9,45,0.08); border-radius: 20px; padding: 36px; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+  .navy-card { background: #202544; border: 1px solid rgba(244,243,243,0.06); border-radius: 20px; color: #F4F3F3; padding: 36px; }
+  .rule { width: 56px; height: 6px; background: #465CEE; border-radius: 999px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #465CEE; margin-right: 8px; vertical-align: middle; }
+
+  /* ── 01 · Big statement (navy) ───────────────────── */
+  .l01 { justify-content: center; min-height: 1080px; }
+  .l01 .grad { width: 900px; height: 700px; right: -180px; bottom: -180px; }
+  .l01 h2 { font-family: var(--font-display); font-weight: 400; font-size: 110px; line-height: 1.05; letter-spacing: -0.02em; color: #F4F3F3; max-width: 1500px; }
+  .l01 h2 b { font-weight: 700; }
+
+  /* ── 02 · Statement + 3 bullets (offwhite) ──────── */
+  .l02 { justify-content: center; gap: 64px; min-height: 1080px; }
+  .l02 .grad { width: 700px; height: 500px; right: -200px; top: -150px; opacity: 0.55; }
+  .l02 h2 { font-family: var(--font-display); font-weight: 400; font-size: 72px; line-height: 1.12; letter-spacing: -0.02em; max-width: 1500px; }
+  .l02 h2 b { font-weight: 700; }
+  .l02 ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; padding: 0; list-style: none; max-width: 1500px; }
+  .l02 li { font-size: 20px; line-height: 1.5; color: rgba(4,9,45,0.78); }
+  .l02 li .hd { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-weight: 700; color: #04092D; font-size: 22px; }
+
+  /* ── 03 · 2-column text (navy) ──────────────────── */
+  .l03 { justify-content: center; min-height: 1080px; }
+  .l03 .grad { width: 700px; height: 500px; left: -200px; top: -120px; opacity: 0.55; }
+  .l03 .eyebrow { margin-bottom: 12px; }
+  .l03 h2 { font-family: var(--font-display); font-weight: 400; font-size: 72px; line-height: 1.1; letter-spacing: -0.02em; color: #F4F3F3; max-width: 1500px; }
+  .l03 h2 b { font-weight: 700; }
+  .l03 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; margin-top: 60px; }
+  .l03 p { font-size: 20px; line-height: 1.55; color: rgba(244,243,243,0.8); }
+
+  /* ── 04 · Quote (offwhite) ──────────────────────── */
+  .l04 { justify-content: center; min-height: 1080px; padding: 160px 180px 120px; }
+  .l04 .grad { width: 700px; height: 500px; right: -200px; bottom: -150px; opacity: 0.55; }
+  .l04 .qmark { font-family: var(--font-display); font-weight: 700; color: #465CEE; font-size: 180px; line-height: 0.6; height: 100px; margin-bottom: 20px; }
+  .l04 blockquote { font-family: var(--font-display); font-weight: 400; font-size: 56px; line-height: 1.2; letter-spacing: -0.01em; color: #04092D; max-width: 1500px; }
+  .l04 blockquote b { font-weight: 700; }
+  .l04 .cite { margin-top: 48px; display: flex; align-items: center; gap: 20px; }
+  .l04 .cite .ava { width: 64px; height: 64px; border-radius: 50%; background: #B8C8F0 url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80') center/cover no-repeat; }
+  .l04 .cite .who { font-size: 20px; font-weight: 700; color: #04092D; }
+  .l04 .cite .role { font-size: 15px; color: rgba(4,9,45,0.65); margin-top: 2px; }
+
+  /* ── 05 · Metric grid 4-up (navy) ───────────────── */
+  .l05 { justify-content: center; gap: 56px; min-height: 1080px; }
+  .l05 .grad { width: 800px; height: 500px; right: -250px; top: -150px; opacity: 0.55; }
+  .l05 h2 { font-family: var(--font-display); font-weight: 400; font-size: 60px; line-height: 1.1; letter-spacing: -0.02em; color: #F4F3F3; max-width: 1500px; }
+  .l05 h2 b { font-weight: 700; }
+  .l05 .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .l05 .navy-card .lbl { font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(244,243,243,0.6); }
+  .l05 .navy-card .n { font-family: var(--font-display); font-weight: 700; font-size: 88px; line-height: 1; margin: 16px 0 18px; letter-spacing: -0.02em; color: #F4F3F3; }
+  .l05 .navy-card .n small { font-size: 38px; font-weight: 300; color: rgba(244,243,243,0.6); }
+  .l05 .navy-card p { font-size: 15px; line-height: 1.45; color: rgba(244,243,243,0.7); }
+
+  /* ── 06 · Timeline (offwhite) ───────────────────── */
+  .l06 { justify-content: center; gap: 80px; min-height: 1080px; }
+  .l06 .grad { width: 800px; height: 500px; left: -250px; bottom: -150px; opacity: 0.5; }
+  .l06 h2 { font-family: var(--font-display); font-weight: 400; font-size: 54px; line-height: 1.12; letter-spacing: -0.02em; max-width: 1500px; }
+  .l06 h2 b { font-weight: 700; }
+  .l06 .rail { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .l06 .rail::before { content: ""; position: absolute; top: 12px; left: 12px; right: 12px; height: 2px; background: rgba(4,9,45,0.15); }
+  .l06 .step { position: relative; padding-top: 40px; }
+  .l06 .step .mk { position: absolute; top: 3px; left: 0; width: 18px; height: 18px; border-radius: 50%; background: #465CEE; border: 3px solid #F4F3F3; box-shadow: 0 0 0 1px rgba(4,9,45,0.15); }
+  .l06 .step .yr { font-family: var(--font-mono); font-size: 14px; color: #465CEE; font-weight: 600; letter-spacing: 0.05em; }
+  .l06 .step .t  { font-size: 22px; font-weight: 700; color: #04092D; margin-top: 10px; }
+  .l06 .step p   { font-size: 16px; line-height: 1.5; color: rgba(4,9,45,0.72); margin-top: 10px; }
+
+  /* ── 07 · Comparison 2-up (offwhite) ────────────── */
+  .l07 { justify-content: center; gap: 56px; min-height: 1080px; }
+  .l07 .grad { width: 700px; height: 500px; right: -200px; bottom: -180px; opacity: 0.5; }
+  .l07 h2 { font-family: var(--font-display); font-weight: 400; font-size: 60px; line-height: 1.1; letter-spacing: -0.02em; max-width: 1500px; }
+  .l07 h2 b { font-weight: 700; }
+  .l07 .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .l07 .pair .card { display: flex; flex-direction: column; gap: 20px; min-height: 400px; }
+  .l07 .pair .card.accent { background: #04092D; color: #F4F3F3; border: none; }
+  .l07 .pair .tag { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #465CEE; }
+  .l07 .pair .accent .tag { color: #92ADFF; }
+  .l07 .pair h3 { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.1; letter-spacing: -0.01em; }
+  .l07 .pair ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+  .l07 .pair li { display: flex; gap: 12px; font-size: 17px; line-height: 1.4; }
+  .l07 .pair li::before { content: "→"; color: #465CEE; font-weight: 700; }
+  .l07 .pair .accent li::before { color: #92ADFF; }
+
+  /* ── 08 · Single image full-bleed caption (offwhite) ── */
+  .l08 { padding: 0; min-height: 1080px; display: grid; grid-template-columns: 1fr 1fr; }
+  .l08 .caption { padding: 140px 100px 100px; display: flex; flex-direction: column; justify-content: center; gap: 32px; }
+  .l08 .caption .eyebrow { display: flex; align-items: center; gap: 16px; }
+  .l08 .caption h2 { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.1; letter-spacing: -0.02em; }
+  .l08 .caption h2 b { font-weight: 700; }
+  .l08 .caption p { font-size: 20px; line-height: 1.55; color: rgba(4,9,45,0.72); max-width: 520px; }
+  .l08 .imgfull {
+    background:
+      url('https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80') center/cover no-repeat,
+      #B8C8F0;
+  }
+
+  /* ── 09 · Section divider (navy) ──────────────── */
+  .l09 { justify-content: space-between; min-height: 1080px; }
+  .l09 .grad { width: 1000px; height: 800px; right: -200px; bottom: -250px; opacity: 0.85; }
+  .l09 .top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .l09 .chapter {
+    font-family: var(--font-mono); font-size: 14px; color: rgba(244,243,243,0.6);
+    letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .l09 .main { display: flex; align-items: flex-end; gap: 48px; }
+  .l09 .num {
+    font-family: var(--font-display); font-weight: 300; font-size: 260px;
+    line-height: 1; color: rgba(244,243,243,0.25); letter-spacing: -0.02em;
+  }
+  .l09 h2 { font-family: var(--font-display); font-weight: 400; font-size: 104px; line-height: 1; letter-spacing: -0.02em; color: #F4F3F3; }
+  .l09 h2 b { font-weight: 700; }
+  .l09 .foot { font-size: 18px; color: rgba(244,243,243,0.7); max-width: 700px; line-height: 1.5; }
+
+  /* ── 10 · Product mockup showcase (offwhite) ─── */
+  .l10 { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; min-height: 1080px; }
+  .l10 .grad { width: 900px; height: 640px; right: -250px; top: -120px; opacity: 0.6; }
+  .l10 .text .eyebrow { margin-bottom: 20px; }
+  .l10 .text h2 { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.1; letter-spacing: -0.02em; }
+  .l10 .text h2 b { font-weight: 700; }
+  .l10 .text p { font-size: 20px; line-height: 1.55; color: rgba(4,9,45,0.72); margin-top: 28px; max-width: 520px; }
+  .l10 .mock { position: relative; margin-right: -100px; background: #fff; border-radius: 20px 0 0 20px; border: 1px solid rgba(4,9,45,0.08); border-right: 0; box-shadow: 0 40px 80px rgba(4,9,45,0.12); padding: 40px; display: grid; gap: 18px; }
+  .l10 .mock .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .l10 .mock .pill { background: #F7F8FA; border: 1px solid rgba(4,9,45,0.06); border-radius: 12px; padding: 12px 14px; font-size: 12px; font-weight: 500; color: #04092D; }
+  .l10 .mock .bar { height: 160px; background: linear-gradient(180deg, rgba(70,92,238,0.08), rgba(70,92,238,0)); border-radius: 12px; position: relative; border: 1px solid rgba(4,9,45,0.06); }
+  .l10 .mock .bar .line { position: absolute; inset: auto 16px 16px 16px; height: 2px; background: #465CEE; transform-origin: left; }
+
+  /* ── 11 · Team/Speakers row (offwhite) ────────── */
+  .l11 { justify-content: center; gap: 72px; min-height: 1080px; }
+  .l11 .grad { width: 800px; height: 500px; left: -250px; top: -150px; opacity: 0.5; }
+  .l11 h2 { font-family: var(--font-display); font-weight: 400; font-size: 54px; line-height: 1.1; letter-spacing: -0.02em; max-width: 1500px; }
+  .l11 h2 b { font-weight: 700; }
+  .l11 .people { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; }
+  .l11 .p { display: flex; flex-direction: column; gap: 16px; }
+  .l11 .ava { width: 100%; aspect-ratio: 1/1; border-radius: 24px; background-size: cover; background-position: center; background-color: #B8C8F0; }
+  .l11 .p:nth-child(1) .ava { background-image: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80'); }
+  .l11 .p:nth-child(2) .ava { background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&q=80'); }
+  .l11 .p:nth-child(3) .ava { background-image: url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&q=80'); }
+  .l11 .p:nth-child(4) .ava { background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80'); }
+  .l11 .p .nm { font-size: 22px; font-weight: 700; color: #04092D; }
+  .l11 .p .rl { font-size: 15px; color: rgba(4,9,45,0.65); margin-top: 4px; line-height: 1.4; }
+
+  /* ── 12 · Closing CTA (navy) ────────────────── */
+  .l12 { justify-content: space-between; min-height: 1080px; padding-top: 200px; padding-bottom: 140px; }
+  .l12 .grad { width: 1000px; height: 700px; left: -200px; bottom: -200px; }
+  .l12 h2 { font-family: var(--font-display); font-weight: 400; font-size: 104px; line-height: 1.02; letter-spacing: -0.02em; color: #F4F3F3; max-width: 1500px; }
+  .l12 h2 b { font-weight: 700; }
+  .l12 p { font-size: 24px; color: rgba(244,243,243,0.8); line-height: 1.45; max-width: 760px; margin-top: 28px; }
+  .l12 .foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; }
+  .l12 .btn { display: inline-flex; align-items: center; gap: 14px; padding: 18px 32px; border-radius: 999px; background: #F4F3F3; color: #04092D; font-weight: 600; font-size: 20px; border: none; }
+  .l12 .btn svg { width: 20px; height: 20px; }
+  .l12 .foot .url { font-size: 18px; color: rgba(244,243,243,0.7); font-family: var(--font-mono); letter-spacing: 0.05em; }
+
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 Big statement (navy) -->
+  <section class="bg-navy l01" data-label="01 Statement">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <h2>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit sed do eiusmod.</h2>
+    <div class="page-n">01</div>
+  </section>
+
+  <!-- 02 Statement + 3 bullets (offwhite) -->
+  <section class="bg-offwhite l02" data-label="02 Statement + 3 bullets">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Section title</div>
+    </div>
+    <h2>Lorem ipsum dolor sit amet, <b>consectetur adipiscing</b> elit.</h2>
+    <ul>
+      <li>
+        <div class="hd"><span class="dot"></span>Lorem ipsum</div>
+        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.
+      </li>
+      <li>
+        <div class="hd"><span class="dot"></span>Dolor sit amet</div>
+        Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute.
+      </li>
+      <li>
+        <div class="hd"><span class="dot"></span>Consectetur</div>
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.
+      </li>
+    </ul>
+    <div class="page-n">02</div>
+  </section>
+
+  <!-- 03 Two-column text (navy) -->
+  <section class="bg-navy l03" data-label="03 Two-column text">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Chapter 02</div>
+    </div>
+    <div class="eyebrow">Lorem ipsum</div>
+    <h2>Dolor sit amet consectetur <b>adipiscing elit</b>.</h2>
+    <div class="cols">
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+    </div>
+    <div class="page-n">03</div>
+  </section>
+
+  <!-- 04 Quote (offwhite) -->
+  <section class="bg-offwhite l04" data-label="04 Quote">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+    </div>
+    <div class="qmark">"</div>
+    <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing <b>elit sed do eiusmod</b> tempor incididunt ut labore.</blockquote>
+    <div class="cite">
+      <div class="ava"></div>
+      <div>
+        <div class="who">Lorem Ipsum</div>
+        <div class="role">Role, Company name</div>
+      </div>
+    </div>
+    <div class="page-n">04</div>
+  </section>
+
+  <!-- 05 Metric grid 4-up (navy) -->
+  <section class="bg-navy l05" data-label="05 Metric 4-up">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Proof</div>
+    </div>
+    <h2>Lorem ipsum <b>dolor sit amet</b>.</h2>
+    <div class="grid">
+      <div class="navy-card">
+        <div class="lbl">Lorem ipsum</div>
+        <div class="n">00<small>%</small></div>
+        <p>Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+      </div>
+      <div class="navy-card">
+        <div class="lbl">Dolor sit</div>
+        <div class="n">000<small>+</small></div>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+      <div class="navy-card">
+        <div class="lbl">Consectetur</div>
+        <div class="n">0.0<small>bn</small></div>
+        <p>Duis aute irure dolor in reprehenderit voluptate velit.</p>
+      </div>
+      <div class="navy-card">
+        <div class="lbl">Adipiscing</div>
+        <div class="n">+00<small>%</small></div>
+        <p>Excepteur sint occaecat cupidatat non proident deserunt.</p>
+      </div>
+    </div>
+    <div class="page-n">05</div>
+  </section>
+
+  <!-- 06 Timeline (offwhite) -->
+  <section class="bg-offwhite l06" data-label="06 Timeline">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Roadmap</div>
+    </div>
+    <h2>Lorem ipsum dolor <b>sit amet consectetur</b> adipiscing.</h2>
+    <div class="rail">
+      <div class="step">
+        <div class="mk"></div>
+        <div class="yr">Q1</div>
+        <div class="t">Lorem ipsum</div>
+        <p>Sed do eiusmod tempor incididunt ut labore.</p>
+      </div>
+      <div class="step">
+        <div class="mk"></div>
+        <div class="yr">Q2</div>
+        <div class="t">Dolor sit amet</div>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation.</p>
+      </div>
+      <div class="step">
+        <div class="mk"></div>
+        <div class="yr">Q3</div>
+        <div class="t">Consectetur</div>
+        <p>Duis aute irure dolor in reprehenderit voluptate.</p>
+      </div>
+      <div class="step">
+        <div class="mk"></div>
+        <div class="yr">Q4</div>
+        <div class="t">Adipiscing elit</div>
+        <p>Excepteur sint occaecat cupidatat non proident.</p>
+      </div>
+    </div>
+    <div class="page-n">06</div>
+  </section>
+
+  <!-- 07 Comparison 2-up (offwhite) -->
+  <section class="bg-offwhite l07" data-label="07 Comparison">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Before / After</div>
+    </div>
+    <h2>Lorem ipsum dolor <b>sit amet consectetur</b>.</h2>
+    <div class="pair">
+      <div class="card">
+        <div class="tag">Before</div>
+        <h3>Lorem ipsum dolor sit.</h3>
+        <ul>
+          <li>Sed do eiusmod tempor incididunt ut labore.</li>
+          <li>Ut enim ad minim veniam, quis nostrud.</li>
+          <li>Duis aute irure dolor in reprehenderit.</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <div class="tag">After</div>
+        <h3>Dolor sit amet adipiscing.</h3>
+        <ul>
+          <li>Consectetur adipiscing elit sed do eiusmod.</li>
+          <li>Tempor incididunt ut labore et dolore magna.</li>
+          <li>Excepteur sint occaecat cupidatat non proident.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="page-n">07</div>
+  </section>
+
+  <!-- 08 Full image + caption (offwhite) -->
+  <section class="bg-offwhite l08" data-label="08 Full image + caption">
+    <div class="imgfull"></div>
+    <div class="caption">
+      <div class="logo-bar" style="position: static; padding: 0;">
+        <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+        <div class="div"></div><div class="sec">Story</div>
+      </div>
+      <div class="eyebrow">Lorem ipsum</div>
+      <h2>Dolor sit amet <b>consectetur</b>.</h2>
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+    </div>
+    <div class="page-n">08</div>
+  </section>
+
+  <!-- 09 Section divider (navy) -->
+  <section class="bg-navy l09" data-label="09 Section divider">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <div class="top">
+      <div class="chapter">Chapter 03</div>
+    </div>
+    <div class="main">
+      <div class="num">03</div>
+      <h2>Lorem ipsum<br/><b>dolor sit amet</b></h2>
+    </div>
+    <div class="foot">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam.</div>
+    <div class="page-n">09</div>
+  </section>
+
+  <!-- 10 Product mockup (offwhite) -->
+  <section class="bg-offwhite l10" data-label="10 Product mockup">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Product</div>
+    </div>
+    <div class="text">
+      <div class="eyebrow">Lorem ipsum</div>
+      <h2>Dolor sit amet <b>consectetur adipiscing</b> elit.</h2>
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud.</p>
+    </div>
+    <div class="mock">
+      <div class="row">
+        <div class="pill"><span class="dot"></span>Lorem ipsum</div>
+        <div class="pill"><span class="dot" style="background:#F5C564;"></span>Dolor sit</div>
+        <div class="pill"><span class="dot" style="background:#FF859A;"></span>Consectetur</div>
+      </div>
+      <div class="bar"><div class="line" style="width: 68%;"></div></div>
+      <div class="row">
+        <div class="pill">Tempor</div>
+        <div class="pill">Incididunt</div>
+        <div class="pill">Labore et</div>
+      </div>
+    </div>
+    <div class="page-n">10</div>
+  </section>
+
+  <!-- 11 Speakers row (offwhite) -->
+  <section class="bg-offwhite l11" data-label="11 Speakers">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div><div class="sec">Speakers</div>
+    </div>
+    <h2>Lorem ipsum <b>dolor sit amet</b>.</h2>
+    <div class="people">
+      <div class="p"><div class="ava"></div><div class="nm">Lorem Ipsum</div><div class="rl">Role, Company name</div></div>
+      <div class="p"><div class="ava"></div><div class="nm">Dolor Sitamet</div><div class="rl">Role, Company name</div></div>
+      <div class="p"><div class="ava"></div><div class="nm">Consect Etur</div><div class="rl">Role, Company name</div></div>
+      <div class="p"><div class="ava"></div><div class="nm">Adipi Scing</div><div class="rl">Role, Company name</div></div>
+    </div>
+    <div class="page-n">11</div>
+  </section>
+
+  <!-- 12 Closing CTA (navy) -->
+  <section class="bg-navy l12" data-label="12 Closing CTA">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <div>
+      <h2>Lorem ipsum <b>dolor sit.</b></h2>
+      <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <div class="foot">
+      <button class="btn">Get a demo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <div class="url">didomi.io</div>
+    </div>
+  </section>
+
+</deck-stage>
+</body></html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Cards & radius · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Cards, radius & elevation</div>
+    <div class="pv-meta">2 · 4 · 8 · 16 · 32 · 999</div>
+  </div>
+
+  <div class="pv-grid" style="grid-template-columns: repeat(6, 1fr); gap: 12px;">
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:2px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">2px</div>
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:4px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">4px</div>
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:8px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">8px</div>
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:16px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">16px</div>
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:32px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">32px</div>
+    <div style="height:70px; background:#fff; border:1px solid var(--border); border-radius:999px; display:grid; place-items:center; font-family:var(--font-mono); font-size:11px;">pill</div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:12px;">Cards in context · tight product cards vs oversized marketing</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+      <!-- Product-tight card -->
+      <div style="background:#fff; border:1px solid rgba(4,9,45,0.08); border-radius:8px; padding: 20px; box-shadow: 0 1px 2px rgba(0,0,0,0.04);">
+        <div style="display:flex; justify-content: space-between; align-items:flex-start;">
+          <div>
+            <div class="eyebrow" style="font-size: 10px;">Consent rate · last 30 days</div>
+            <div style="font-family:var(--font-display); font-weight:700; font-size: 42px; letter-spacing:-0.02em; line-height:1.1; margin-top:4px;">89.2<span style="font-size: 24px; color:var(--fg-muted);">%</span></div>
+          </div>
+          <div style="background:#AFEDDD; color:#04092D; font-size: 11px; font-weight:600; padding: 4px 8px; border-radius: 999px;">+4.1 pts</div>
+        </div>
+        <div style="margin-top:12px; font-size:12px; color:var(--fg-subtle);">Across all 14 domains · benchmark 72%</div>
+      </div>
+
+      <!-- Marketing oversized card · navy base, gradient as ≤30% accent -->
+      <div style="background: #04092D; color:#F4F3F3; border-radius: 32px; padding: 32px; position: relative; overflow: hidden;">
+        <!-- corner-anchored gradient blob, ~22% coverage -->
+        <div aria-hidden="true" style="
+          position: absolute;
+          width: 210px; height: 150px;
+          right: -40px; bottom: -40px;
+          border-radius: 50%;
+          filter: blur(42px);
+          pointer-events: none;
+          background:
+            radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.95) 0%, rgba(70,92,238,0) 70%),
+            radial-gradient(60% 60% at 75% 25%, rgba(255,133,154,0.9) 0%, rgba(255,133,154,0) 65%);
+        "></div>
+        <div style="position: relative; z-index: 1;">
+          <div class="eyebrow" style="color:rgba(244,243,243,0.75);">Proof</div>
+          <div style="font-family:var(--font-display); font-weight:700; font-size: 52px; line-height: 1.0; letter-spacing:-0.03em; margin-top:8px;">+22%</div>
+          <div style="margin-top: 8px; font-size: 16px; line-height:1.45; max-width: 280px; color:rgba(244,243,243,0.85);">Average return on ad spend for Didomi customers in 2024.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:12px;">Shadow scale</div>
+    <div class="pv-grid" style="grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      <div style="height:100px; background:#fff; border-radius:12px; box-shadow: var(--shadow-xs); display:grid; place-items:end; padding:12px; font-family:var(--font-mono); font-size:10px; color:var(--fg-subtle);">xs</div>
+      <div style="height:100px; background:#fff; border-radius:12px; box-shadow: var(--shadow-sm); display:grid; place-items:end; padding:12px; font-family:var(--font-mono); font-size:10px; color:var(--fg-subtle);">sm</div>
+      <div style="height:100px; background:#fff; border-radius:12px; box-shadow: var(--shadow-md); display:grid; place-items:end; padding:12px; font-family:var(--font-mono); font-size:10px; color:var(--fg-subtle);">md</div>
+      <div style="height:100px; background:#fff; border-radius:12px; box-shadow: var(--shadow-lg); display:grid; place-items:end; padding:12px; font-family:var(--font-mono); font-size:10px; color:var(--fg-subtle);">lg</div>
+    </div>
+  </div>
+</div>
+</body></html>

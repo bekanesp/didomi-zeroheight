@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Navigation items · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .nav-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px 32px;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--divider);
+  }
+  .nav-row:first-of-type { border-top: 0; padding-top: 0; }
+  .group-title {
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #04092D;
+  }
+  .state-cell {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .state-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.5);
+  }
+
+  /* Main menu item · 16/20 Montserrat Bold · navy */
+  .nav-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #04092D;
+    padding: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .nav-main.is-hover { background: transparent; color: #04092D; }
+  .nav-main.is-hover .chev { transform: translateY(1px); }
+  .nav-main.is-focus { outline: 2px solid #B5C7D0; outline-offset: 2px; }
+  .nav-main.is-active { color: #465CEE; }
+
+  /* Sub-menu (dropdown) item · 12px Medium · row inside a white panel */
+  .submenu-panel {
+    display: inline-flex;
+    flex-direction: column;
+    width: 220px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 16px 32px rgba(0,0,0,0.06), 0 4px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .submenu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #04092D;
+    cursor: pointer;
+  }
+  .submenu-item.is-hover { background: #F2F4FF; }
+  .submenu-item.is-active { background: #F2F4FF; color: #465CEE; font-weight: 700; }
+
+  /* Sur-menu (top utility bar) · 13px Medium · navy */
+  .sur-menu {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    padding: 10px 24px;
+    background: #04092D;
+    border-radius: 999px;
+  }
+  .sur-item {
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+  }
+  .sur-item.is-hover { color: #92ADFF; }
+  .sur-item.is-active { color: #92ADFF; font-weight: 700; }
+
+  .chev {
+    width: 15px; height: 15px; display: inline-block; flex-shrink: 0;
+  }
+
+  /* Example bar that demonstrates composition */
+  .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 24px;
+    width: 100%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .nav-bar .logo img {
+    height: 28px;
+    display: block;
+  }
+  .nav-bar nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .nav-bar { flex-wrap: wrap; gap: 16px; row-gap: 12px; }
+
+  .legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 40px;
+    padding: 20px 24px;
+    background: #F9FAFA;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 12px;
+    color: #04092D;
+  }
+  .legend .k {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(4,9,45,0.6);
+    margin-bottom: 2px;
+    display: block;
+  }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Navigation items</div>
+    <div class="pv-meta">Desktop · Main menu · Sub-menu · Sur-menu</div>
+  </div>
+
+  <!-- MAIN MENU ITEMS -->
+  <div class="nav-row">
+    <div class="group-title">Main menu<br><span style="font-weight:500;color:rgba(4,9,45,0.6);text-transform:none;letter-spacing:0;font-size:11px;">16/20 Bold</span></div>
+    <div style="display:flex; flex-wrap:wrap; gap:24px 40px; align-items:flex-end;">
+      <div class="state-cell">
+        <span class="nav-main">Navigation label <svg class="chev" viewBox="0 0 15 15" fill="none"><path d="M3.5 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="state-label">Default · sub-menu yes</span>
+      </div>
+      <div class="state-cell">
+        <span class="nav-main is-hover">Navigation label <svg class="chev" viewBox="0 0 15 15" fill="none"><path d="M11.5 9.5l-4-4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="state-label">Hover (chevron up)</span>
+      </div>
+      <div class="state-cell">
+        <span class="nav-main is-focus">Navigation label</span>
+        <span class="state-label">Focus</span>
+      </div>
+      <div class="state-cell">
+        <span class="nav-main is-active">Navigation label</span>
+        <span class="state-label">Active · current page</span>
+      </div>
+      <div class="state-cell">
+        <span class="nav-main" style="color:rgba(4,9,45,0.4); cursor:not-allowed;">Navigation label</span>
+        <span class="state-label">Disabled</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-MENU -->
+  <div class="nav-row">
+    <div class="group-title">Sub-menu<br><span style="font-weight:500;color:rgba(4,9,45,0.6);text-transform:none;letter-spacing:0;font-size:11px;">12 Medium rows</span></div>
+    <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+      <div class="state-cell">
+        <div class="submenu-panel">
+          <div class="submenu-item">Consent management</div>
+          <div class="submenu-item is-hover">Preference management</div>
+          <div class="submenu-item">Privacy requests</div>
+          <div class="submenu-item is-active">Data mapping</div>
+          <div class="submenu-item">Vendor management</div>
+        </div>
+        <span class="state-label">Dropdown panel</span>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div class="state-cell">
+          <div class="submenu-panel" style="width:180px;"><div class="submenu-item">Default row</div></div>
+          <span class="state-label">Default</span>
+        </div>
+        <div class="state-cell">
+          <div class="submenu-panel" style="width:180px;"><div class="submenu-item is-hover">Hover row</div></div>
+          <span class="state-label">Hover · Blue 050</span>
+        </div>
+        <div class="state-cell">
+          <div class="submenu-panel" style="width:180px;"><div class="submenu-item is-active">Active row</div></div>
+          <span class="state-label">Active</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUR MENU -->
+  <div class="nav-row">
+    <div class="group-title">Sur-menu<br><span style="font-weight:500;color:rgba(4,9,45,0.6);text-transform:none;letter-spacing:0;font-size:11px;">Utility bar on navy</span></div>
+    <div class="state-cell">
+      <div class="sur-menu">
+        <span class="sur-item">Developers</span>
+        <span class="sur-item is-active">Partners</span>
+        <span class="sur-item is-hover">Resources</span>
+        <span class="sur-item">Contact</span>
+      </div>
+      <span class="state-label">Inline utility links · default / hover / active</span>
+    </div>
+  </div>
+
+  <!-- COMPOSED BAR -->
+  <div class="nav-row">
+    <div class="group-title">In context</div>
+    <div class="nav-bar">
+      <span class="logo"><img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/></span>
+      <nav>
+        <span class="nav-main">Platform <svg class="chev" viewBox="0 0 15 15" fill="none"><path d="M3.5 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="nav-main is-active">Pricing</span>
+        <span class="nav-main">Resources <svg class="chev" viewBox="0 0 15 15" fill="none"><path d="M3.5 5.5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </nav>
+      <button style="background:#465CEE;color:#fff;border:0;border-radius:999px;font-family:Montserrat,sans-serif;font-weight:500;font-size:13px;padding:10px 18px;cursor:pointer;white-space:nowrap;">Book demo</button>
+    </div>
+  </div>
+
+  <!-- SPEC -->
+  <div class="legend">
+    <div><span class="k">Main menu</span>Montserrat Bold 16 · 20 line-height · <b>#04092D</b></div>
+    <div><span class="k">Active / hover accent</span>Electric Blue <b>#465CEE</b></div>
+    <div><span class="k">Sub-menu row</span>Montserrat Medium 12 · hover bg <b>#F2F4FF</b></div>
+    <div><span class="k">Sub-menu panel</span>8 / 12&thinsp;px radius · shadow-md · white surface</div>
+    <div><span class="k">Chevron</span>15&thinsp;px · flips down → up on expand</div>
+    <div><span class="k">Focus</span>2&thinsp;px #B5C7D0 outline · 2&thinsp;px offset</div>
+  </div>
+</div>
+</body></html>

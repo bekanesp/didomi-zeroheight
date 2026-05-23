@@ -1,0 +1,17 @@
+{
+  "name": "didomi-design-system-zeroheight",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Didomi design system, Zeroheight wiring, and Claude/MCP brand-adherence tooling.",
+  "scripts": {
+    "tokens": "node tools/extract-tokens.mjs",
+    "pdf":    "node tools/render-pdf.mjs",
+    "pptx":   "node tools/render-pptx.mjs",
+    "serve":  "npx serve .",
+    "relocate-paths": "bash tools/relocate-paths.sh"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
+}

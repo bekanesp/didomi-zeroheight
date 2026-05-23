@@ -1,0 +1,66 @@
+/* Preview-card shell used in the Design System tab.
+   Pair with ../colors_and_type.css. */
+
+.pv-card {
+  min-height: 640px;
+  padding: 40px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+}
+.pv-card *, .pv-card *::before, .pv-card *::after { box-sizing: border-box; }
+
+.pv-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--divider);
+}
+.pv-title {
+  font-weight: var(--fw-bold);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.pv-meta {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-weight: var(--fw-semibold);
+}
+.pv-grid { display: grid; gap: 16px; }
+.pv-flex { display: flex; gap: 16px; flex-wrap: wrap; }
+
+/* Swatch tile */
+.swatch {
+  border-radius: 12px;
+  padding: 16px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+}
+.swatch .name { font-weight: var(--fw-semibold); font-size: 14px; }
+.swatch .hex { font-family: var(--font-mono); font-size: 11px; opacity: 0.8; letter-spacing: 0.02em; text-transform: uppercase; }
+.swatch .role { font-size: 11px; opacity: 0.7; margin-top: 4px; }
+
+/* Small token chip */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  font-size: 12px;
+  font-weight: var(--fw-medium);
+}
+.chip .dot { width: 10px; height: 10px; border-radius: 50%; }

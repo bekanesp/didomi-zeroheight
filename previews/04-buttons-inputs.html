@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8" />
+<title>Buttons & inputs · Didomi</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<link rel="stylesheet" href="preview.css" />
+<style>
+  .dd-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px; border-radius: 999px;
+    font-family: var(--font-sans); font-weight: 600; font-size: 15px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: background 150ms ease, box-shadow 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .dd-btn.primary { background: #465CEE; color: #fff; }
+  .dd-btn.primary:hover { background: #1E22AE; }
+  .dd-btn.secondary { background: #04092D; color: #F4F3F3; }
+  .dd-btn.secondary:hover { background: #181932; }
+  .dd-btn.ghost { background: transparent; color: #04092D; border-color: rgba(4,9,45,0.25); }
+  .dd-btn.ghost:hover { background: rgba(4,9,45,0.04); border-color: rgba(4,9,45,0.5); }
+  .dd-btn.link { background: transparent; padding: 6px 0; color:#465CEE; text-decoration: underline; text-underline-offset: 4px; }
+  .dd-btn.sm { padding: 8px 14px; font-size: 13px; }
+  .dd-btn.lg { padding: 16px 28px; font-size: 17px; }
+  .dd-arrow { width:16px; height:16px; }
+
+  .dd-input {
+    display:flex; align-items:center; gap:8px;
+    padding: 10px 14px; border-radius: 6px;
+    background: #fff; border: 1px solid rgba(4,9,45,0.15);
+    font-family: var(--font-sans); font-size:14px;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .dd-input input { all: unset; flex:1; color:#04092D; }
+  .dd-input:focus-within { border-color:#465CEE; box-shadow: 0 0 0 3px rgba(70,92,238,0.2); }
+  .dd-input .label { position: absolute; }
+
+  .dd-field { display:flex; flex-direction: column; gap:6px; }
+  .dd-field label { font-size: 12px; font-weight: 600; color: #04092D; }
+  .dd-field .help { font-size: 11px; color: rgba(4,9,45,0.55); }
+
+  .dd-toggle { width:36px; height:20px; border-radius: 999px; background:#CBCCEE; position:relative; cursor:pointer; transition: background 120ms ease; }
+  .dd-toggle::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; box-shadow: 0 1px 2px rgba(0,0,0,0.15); transition: left 140ms ease; }
+  .dd-toggle.on { background:#465CEE; }
+  .dd-toggle.on::after { left: 18px; }
+</style>
+</head>
+<body>
+<div class="pv-card">
+  <div class="pv-header">
+    <div class="pv-title">Buttons & inputs</div>
+    <div class="pv-meta">Pill · 6px inputs · electric blue focus</div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:10px;">Primary · electric blue, pill, verb-led</div>
+    <div class="pv-flex" style="align-items:center;">
+      <button class="dd-btn primary lg">Get a demo
+        <svg class="dd-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <button class="dd-btn primary">Save &amp; publish</button>
+      <button class="dd-btn primary sm">Add vendor</button>
+    </div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:10px;">Secondary · ghost · link</div>
+    <div class="pv-flex" style="align-items:center;">
+      <button class="dd-btn secondary">Talk to sales</button>
+      <button class="dd-btn ghost">View documentation</button>
+      <a class="dd-btn link" href="#">Read the full brandbook</a>
+    </div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:10px;">Inputs · 6px radius, hairline border, electric-blue focus</div>
+    <div class="pv-grid" style="grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="dd-field">
+        <label>Work email</label>
+        <div class="dd-input">
+          <input type="email" placeholder="you@company.com" value="marine@didomi.io" />
+        </div>
+        <div class="help">We'll send the demo invite within 24 hours.</div>
+      </div>
+      <div class="dd-field">
+        <label>Search vendors</label>
+        <div class="dd-input">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#04092D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" placeholder="e.g. Google Analytics" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="pv-meta" style="margin-bottom:10px;">Toggle · radio · checkbox</div>
+    <div class="pv-flex" style="align-items:center; gap: 32px;">
+      <div style="display:flex; gap:10px; align-items:center;"><div class="dd-toggle on"></div><span style="font-size:13px;">Analytics enabled</span></div>
+      <div style="display:flex; gap:10px; align-items:center;"><div class="dd-toggle"></div><span style="font-size:13px; color: var(--fg-muted);">Advertising</span></div>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <div style="width:16px; height:16px; border-radius:4px; background:#465CEE; display:grid; place-items:center;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>
+        </div>
+        <span style="font-size:13px;">Accept all purposes</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body></html>
