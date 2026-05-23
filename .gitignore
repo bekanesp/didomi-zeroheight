@@ -7,3 +7,6 @@ out/
 .env.local
 # Never commit raw bundle dumps
 /tmp_bundle/
+package-lock.json
+raw/
+.memsearch/
