@@ -1,5 +1,10 @@
 node_modules/
 out/
+# But DO ship slide thumbnails + Zeroheight page drafts (referenced from Zeroheight iframes / pages)
+!out/thumbs/
+!out/thumbs/**
+!out/zeroheight-pages/
+!out/zeroheight-pages/**
 .DS_Store
 *.log
 # Local secrets — Zeroheight tokens, etc.
