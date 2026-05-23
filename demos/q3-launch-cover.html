@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Didomi · Q3 Launch Cover</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<script src="../slides/deck-stage.js"></script>
+<style>
+  html, body { margin: 0; background: #000; }
+  deck-stage { font-family: var(--font-sans); }
+
+  /* All values below resolve to tokens in design-system/tokens/colors_and_type.css.
+     Layout copied verbatim from .cover in slides/templates.html. */
+  section {
+    padding: 80px 100px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  section > * { position: relative; z-index: 1; }
+
+  .bg-navy { background: #04092D; color: #F4F3F3; }
+
+  .logo-bar {
+    position: absolute; top: 80px; left: 100px;
+    display: flex; align-items: center; gap: 18px;
+    z-index: 5;
+  }
+  .logo-bar img { height: 26px; display: block; }
+
+  .grad {
+    position: absolute; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.85) 0%, rgba(70,92,238,0) 72%),
+      radial-gradient(55% 55% at 75% 25%, rgba(255,133,154,0.80) 0%, rgba(255,133,154,0) 66%);
+  }
+
+  h1, p { margin: 0; padding: 0; }
+  .cover { justify-content: flex-end; min-height: 1080px; padding-bottom: 240px; }
+  .cover .grad { width: 900px; height: 700px; right: -200px; bottom: -200px; }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #F4F3F3;
+    max-width: 1200px;
+  }
+  .cover .anchor {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 32px;
+    line-height: 1.25;
+    color: rgba(244,243,243,0.85);
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+  .cover .sub {
+    font-size: 28px;
+    color: rgba(244,243,243,0.8);
+    margin-top: 16px;
+  }
+  .cover .meta {
+    margin-top: 32px;
+    font-size: 16px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(244,243,243,0.55);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- Auto-generated 2026-05-23 from Zeroheight MCP get-page calls + local .cover template -->
+  <section class="bg-navy cover" data-label="Q3 launch cover">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+    </div>
+    <p class="anchor">"Trust but control."</p>
+    <h1>The next generation of<br/>Global Privacy UX Solutions</h1>
+    <p class="sub">Built for enterprise teams who can't trade off speed or trust.</p>
+    <p class="meta">Q3 launch · 2026</p>
+  </section>
+
+</deck-stage>
+</body>
+</html>
