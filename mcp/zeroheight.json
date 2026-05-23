@@ -1,13 +1,10 @@
 {
-  "// description": "Drop-in MCP config for the Didomi Zeroheight design system. Paste this into Claude Code, Claude Desktop, Cursor, Windsurf, or any MCP-aware host. Replace the env values with your own zeroheight credentials (creation: https://developers.zeroheight.com/75fe5b2ed/p/6599ef-creation).",
+  "// description": "Drop-in MCP config for the Sourcepoint by Didomi Design System on zeroheight. Remote HTTP transport — the URL itself is the auth, no env vars. Works in Claude Desktop, Cursor, Windsurf, VS Code Claude extension, and any MCP-aware host.",
+  "// install_via_cli": "claude mcp add --transport http sourcepoint-by-didomi-design-system 'https://mcp.zeroheight.com/mcp/28efaab872fcf03c0806ba559b4e96165c19716c'",
   "mcpServers": {
-    "zeroheight": {
-      "command": "npx",
-      "args": ["-y", "@zeroheight/mcp-server@latest"],
-      "env": {
-        "ZEROHEIGHT_ACCESS_TOKEN": "zhat_REPLACE_ME",
-        "ZEROHEIGHT_CLIENT_ID": "zhci_REPLACE_ME"
-      }
+    "sourcepoint-by-didomi-design-system": {
+      "type": "http",
+      "url": "https://mcp.zeroheight.com/mcp/28efaab872fcf03c0806ba559b4e96165c19716c"
     }
   }
 }

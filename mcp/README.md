@@ -1,125 +1,120 @@
 # Zeroheight MCP — Brand-Aware Claude, Everywhere
 
-The Didomi design system lives at [zeroheight](https://zeroheight.com/). The
-official `@zeroheight/mcp-server` exposes it as an MCP server so Claude (or
-any MCP-aware AI) can look up brand guidance — colors, components, voice,
-do/don't notes — **at the moment of generation**. Plug it in once and every
-deck, blog post, email, Webflow page, or Claude Project that AI assists
-becomes brand-aware by construction.
+Didomi's design system at **Sourcepoint by Didomi Design System** lives at
+[zeroheight](https://zeroheight.com/6254fa778). Zeroheight exposes the
+styleguide as a **remote MCP endpoint** — a single URL that Claude can
+hit on demand to pull brand guidance (Color, Typography, Spacing,
+Components, etc.) right at the moment of generation.
+
+No env vars. No tokens to rotate. The URL itself is the auth and is
+scoped to one styleguide.
 
 ---
 
-## 1. Get credentials
-
-You need two env vars:
-
-| Var | Looks like | Source |
-| --- | --- | --- |
-| `ZEROHEIGHT_CLIENT_ID` | `zhci_…` | zeroheight → Settings → API |
-| `ZEROHEIGHT_ACCESS_TOKEN` | `zhat_…` | zeroheight → Settings → API → "Create token" |
-
-Creation walkthrough: <https://developers.zeroheight.com/75fe5b2ed/p/6599ef-creation>.
-
-**Storage:** put both in `~/.openclaw/openclaw.json` (or 1Password →
-"Zeroheight API Credentials") alongside other secrets. Don't commit them.
-Export them in your shell `.zshrc`:
+## 1. Install (one command)
 
 ```bash
-export ZEROHEIGHT_CLIENT_ID="$(jq -r '.zeroheight.client_id' ~/.openclaw/openclaw.json)"
-export ZEROHEIGHT_ACCESS_TOKEN="$(jq -r '.zeroheight.access_token' ~/.openclaw/openclaw.json)"
+claude mcp add --transport http sourcepoint-by-didomi-design-system \
+  "https://mcp.zeroheight.com/mcp/28efaab872fcf03c0806ba559b4e96165c19716c"
 ```
+
+Writes a global entry to `~/.claude.json`. Every Claude Code session —
+anywhere on disk — picks it up.
+
+Verify:
+
+```bash
+claude mcp list | grep sourcepoint
+# sourcepoint-by-didomi-design-system: https://mcp.zeroheight.com/mcp/... (HTTP) - ✓ Connected
+```
+
+Then in any session:
+
+> list pages for sourcepoint by didomi design system
+
+Claude calls `list-pages` and returns the navigation tree.
 
 ---
 
-## 2. Wire it up
+## 2. Wire into other hosts
 
-### Claude Code (project-scoped)
-
-This repo already ships `.mcp.json` at the root. Any `claude` session
-started from `Zeroheight/` (or anywhere via `--mcp-config`) will load it
-automatically. Confirm with:
-
-```bash
-claude --mcp-config /Users/briankane/Work/Code/Zeroheight/.mcp.json
-```
-
-Then in the session:
-
-> list zeroheight styleguides
-
-You should see Claude call `list-styleguides`.
-
-### Claude Code (global, every session)
-
-Copy the `zeroheight` block from [`./zeroheight.json`](./zeroheight.json) into
-`~/.claude.json`'s `mcpServers` object. Then every session — anywhere on
-disk — has Zeroheight tools available.
+The URL works in any MCP host that supports remote HTTP transport.
 
 ### Claude Desktop
 
-Settings → Developer → "Edit Config" → paste the `zeroheight` block from
-[`./zeroheight.json`](./zeroheight.json) into `mcpServers`. Restart Claude
-Desktop.
+Settings → Developer → "Edit Config" → add:
 
-### Cursor / Windsurf / VS Code (with the Claude extension)
+```json
+{
+  "mcpServers": {
+    "sourcepoint-by-didomi-design-system": {
+      "type": "http",
+      "url": "https://mcp.zeroheight.com/mcp/28efaab872fcf03c0806ba559b4e96165c19716c"
+    }
+  }
+}
+```
 
-Each editor has an MCP settings panel — same JSON shape. Paste, save,
-reload.
+### Cursor / Windsurf / VS Code (Claude extension)
 
-### Custom Claude Projects (claude.ai)
+Same JSON shape — paste into the editor's MCP settings panel.
 
-For Claude Projects on claude.ai, paste the same `zeroheight` block into
-the project's MCP settings. The three tools become available inside that
-project to every conversation.
+### Claude Projects (claude.ai)
+
+Project settings → MCP servers → "Add custom server" → paste the URL.
+
+The drop-in snippet lives at [`./zeroheight.json`](./zeroheight.json).
 
 ---
 
 ## 3. What you get
 
-Three tools, all read-only:
+Four tools, all read-only:
 
 | Tool | What it does |
 | --- | --- |
-| `list-styleguides` | Returns every design system you have access to. Call first. |
-| `list-pages` | Returns the navigation tree (categories, pages, tabs) of one styleguide. |
-| `get-page` | Returns the full content of one page — usage notes, recommendations, code snippets. |
+| `list-pages` | Returns the navigation tree of the design system (categories → pages → IDs). |
+| `list-releases` | Lists published releases of the styleguide. Only call when the user mentions a specific release. |
+| `get-page` | Returns the full content of one page by `pageId` — usage notes, code, attachments. |
+| `get-page-images` | Returns the images on a page as base64 (for when you need the visual examples, not just the prose). |
 
 Typical flow Claude follows on its own:
 
 1. User asks: *"Write a 3-slide intro deck about our Q3 launch."*
-2. Claude calls `list-styleguides` → finds Didomi.
-3. Claude calls `list-pages` → finds the Slide Templates section.
-4. Claude calls `get-page` on Cover, Stat callout, Closing → reads usage
-   rules, palette, do/don'ts.
-5. Claude calls the local `didomi-branded-deck` skill (or generates HTML
-   based on `slides/templates.html`) with token values pulled from
-   `design-system/tokens/tokens.json`.
+2. Claude calls `list-pages` → sees Foundations / Components / Welcome.
+3. Claude calls `get-page` on the Color and Typography pages.
+4. Claude calls `get-page-images` if it needs to mirror a visual example.
+5. Claude generates output using the local
+   [`design-system/tokens/tokens.json`](../design-system/tokens/tokens.json)
+   for the hex/sizes, with the Zeroheight content shaping voice and
+   layout choices.
 6. Output ships on-brand on the first try.
 
 ---
 
-## 4. Telemetry opt-out
+## 4. When the local repo and Zeroheight disagree
 
-The MCP server reports errors to Sentry by default. To disable:
+Designers edit Zeroheight live. The local
+[`tokens.json`](../design-system/tokens/tokens.json) is a snapshot. If a
+value differs:
 
-```jsonc
-"env": {
-  "ZEROHEIGHT_ACCESS_TOKEN": "…",
-  "ZEROHEIGHT_CLIENT_ID": "…",
-  "ZEROHEIGHT_MCP_DISABLE_TELEMETRY": "true"
-}
-```
+- **Brand value (hex, font size, name)** — Zeroheight wins. Pull via
+  `get-page` and update `tokens.json` to match (or regenerate from a
+  fresh `colors_and_type.css`).
+- **Slide template layout** — local `slides/templates.html` wins, because
+  Zeroheight does not yet host the slide layouts as live components.
+  They'll move to Zeroheight once we publish them as pages.
 
 ---
 
-## 5. When you'd want more than read-only
+## 5. When you'd want write access
 
-This MCP doesn't write to zeroheight. If you ever need to:
+This MCP is read-only. If you need to:
 
 - publish a new page from a markdown file,
-- push updated tokens after a CSS change,
-- mirror slide templates as zeroheight pages automatically,
+- push tokens after a CSS change,
+- mirror slide templates as Zeroheight pages automatically,
 
 …build a small companion MCP using the
-[zeroheight REST API](https://developers.zeroheight.com/) and wire it in
-the same `.mcp.json`. Defer until you actually need it.
+[Zeroheight REST API](https://developers.zeroheight.com/). Defer until
+you actually need it.

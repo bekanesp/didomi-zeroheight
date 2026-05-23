@@ -3,15 +3,15 @@
 The source of truth for the Didomi brand — colors, typography, slide
 templates, illustrations, UI kits — plus the wiring that makes every AI
 tool at Didomi (Claude Code, Claude Desktop, Claude Projects, Cursor)
-brand-aware via the official [`@zeroheight/mcp-server`](https://www.npmjs.com/package/@zeroheight/mcp-server)
-MCP.
+brand-aware via the **Sourcepoint by Didomi Design System** styleguide,
+served as a remote Zeroheight MCP.
 
 Origin: this repo started life as a [Claude Design](https://claude.ai/design)
 handoff bundle (`xqbG1ZXH1KzvLGHG995lxg`) that contained the finished
 design system. We landed it here, rewrote a handful of relative paths so
 it runs without modification, extracted W3C-DTCG tokens for Zeroheight
-import, and wired up MCP so Claude can pull guidance from Zeroheight on
-demand.
+import, and connected MCP so Claude can pull guidance from Zeroheight
+live on demand.
 
 ---
 
@@ -25,10 +25,12 @@ open http://localhost:3000/slides/
 # 2. Re-extract design tokens after editing colors_and_type.css
 node tools/extract-tokens.mjs
 
-# 3. Wire Zeroheight MCP into Claude Code (read mcp/README.md first)
-export ZEROHEIGHT_CLIENT_ID="zhci_…"
-export ZEROHEIGHT_ACCESS_TOKEN="zhat_…"
-claude   # any session started here loads .mcp.json automatically
+# 3. Wire Zeroheight MCP — already installed globally on Brian's machine.
+#    To install on another machine (no creds required, URL is the auth):
+claude mcp add --transport http sourcepoint-by-didomi-design-system \
+  "https://mcp.zeroheight.com/mcp/28efaab872fcf03c0806ba559b4e96165c19716c"
+claude mcp list | grep sourcepoint
+# → ✓ Connected
 ```
 
 ---
@@ -39,7 +41,6 @@ claude   # any session started here loads .mcp.json automatically
 .
 ├── README.md                # this file
 ├── HANDOFF.md               # original Claude Design handoff note
-├── .mcp.json                # project-scoped Zeroheight MCP config
 ├── chats/                   # source-of-truth design conversation transcript
 ├── design-system/
 │   ├── tokens/
@@ -148,9 +149,11 @@ jq '.color.brand."electric-blue"' design-system/tokens/tokens.json
 # → { "$value": "#465CEE", "$type": "color" }
 
 # (c) MCP loads in Claude Code
-# Start `claude` in this dir, then ask:
-#   "list zeroheight styleguides"  → should call list-styleguides
-#   "fetch the Didomi color page"  → should call get-page
+# Verify the global install:
+claude mcp list | grep sourcepoint
+# Then in any Claude session:
+#   "list pages for sourcepoint by didomi design system"  → calls list-pages
+#   "get the color page from zeroheight"                  → calls get-page
 
 # (d) Brand-aware deck
 # In the same session: "make me a 3-slide deck about X"
