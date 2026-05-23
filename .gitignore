@@ -1,10 +1,8 @@
 node_modules/
-out/
-# But DO ship slide thumbnails + Zeroheight page drafts (referenced from Zeroheight iframes / pages)
-!out/thumbs/
-!out/thumbs/**
-!out/zeroheight-pages/
-!out/zeroheight-pages/**
+# Ignore generated render output (PDF, PPTX) but DO track committed Pages assets in out/thumbs and out/zeroheight-pages
+out/*.pdf
+out/*.pptx
+out/*.png
 .DS_Store
 *.log
 # Local secrets — Zeroheight tokens, etc.
