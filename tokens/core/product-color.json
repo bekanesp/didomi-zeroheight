@@ -1,0 +1,28 @@
+{
+  "$description": "Didomi Product (application UI) color tokens. Extracted from Kleos > Product > Foundations > Colors scrape, 2026-05-23. Brand-system color tokens live separately in design-system/tokens/tokens.json.",
+  "$extensions": {
+    "com.didomi.source": "https://kleos.didomi.io/62b372835/p/23557c-colors",
+    "com.didomi.scrapedAt": "2026-05-23T14:00:00Z",
+    "com.didomi.partial": "Secondary, Neutral, Shadows, Gradient palettes NOT captured (CSS-rendered, hexes not in DOM). Re-scrape with Firecrawl branding format to complete."
+  },
+  "color": {
+    "product": {
+      "blue": {
+        "1": { "$value": "#d1effa", "$type": "color" },
+        "2": { "$value": "#84d1eb", "$type": "color" },
+        "3": { "$value": "#2fabd5", "$type": "color" },
+        "4": { "$value": "#3186af", "$type": "color" },
+        "5": { "$value": "#265973", "$type": "color" },
+        "6": { "$value": "#1d4153", "$type": "color" }
+      },
+      "pink": {
+        "0": { "$value": "#fffbf9", "$type": "color" },
+        "1": { "$value": "#fff6f2", "$type": "color" },
+        "2": { "$value": "#fff0eb", "$type": "color" },
+        "3": { "$value": "#ffd5c8", "$type": "color" },
+        "4": { "$value": "#e58c71", "$type": "color" },
+        "5": { "$value": "#d66a49", "$type": "color" }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$description": "Didomi Product (application UI) typography tokens. Partial — only Headlines block extracted from Kleos > Product > Foundations > Typography scrape, 2026-05-23.",
+  "$extensions": {
+    "com.didomi.source": "https://kleos.didomi.io/62b372835/p/325f49-typography",
+    "com.didomi.scrapedAt": "2026-05-23T14:00:00Z",
+    "com.didomi.partial": "Source JSON truncated mid-h3 during scrape. Body, Button, Checkboxes, Field, Filter, Links, Table, Tabs, Tiempos, Code, Tooltip blocks NOT captured. Tiempos is a paid Klim Type Foundry typeface, separate from IBM Plex Serif."
+  },
+  "font": {
+    "family": {
+      "product-serif": {
+        "$value": "\"IBM Plex Serif\", \"IBMPlexSerif\", Georgia, serif",
+        "$type": "fontFamily"
+      },
+      "product-sans": {
+        "$value": "\"IBM Plex Sans\", \"IBMPlexSans-Bold\", system-ui, sans-serif",
+        "$type": "fontFamily"
+      },
+      "product-tiempos": {
+        "$value": "\"Tiempos\", Georgia, serif",
+        "$type": "fontFamily",
+        "$description": "Referenced as a separate token group — verify licensing (Klim Type Foundry, paid)."
+      }
+    },
+    "style": {
+      "product": {
+        "h1": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.product-serif}",
+            "fontSize": "32px",
+            "fontWeight": 400,
+            "lineHeight": "37px",
+            "letterSpacing": "0px"
+          }
+        },
+        "h2": {
+          "$type": "typography",
+          "$value": {
+            "fontFamily": "{font.family.product-sans}",
+            "fontSize": "24px",
+            "fontWeight": 700,
+            "lineHeight": "31px",
+            "letterSpacing": "0px"
+          }
+        }
+      }
+    }
+  }
+}
