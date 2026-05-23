@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Grateful Dead · 30 years on the road (illustrated)</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<script src="../slides/deck-stage.js"></script>
+<style>
+  html, body { margin: 0; background: #000; }
+  deck-stage { font-family: var(--font-sans); }
+
+  /* .three-up base — copied from slides/templates.html, with image-cap rather than outline numeral. */
+  section {
+    padding: 80px 100px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  section > * { position: relative; z-index: 1; }
+
+  .bg-offwhite { background: #F4F3F3; color: #04092D; }
+
+  .logo-bar {
+    position: absolute; top: 80px; left: 100px;
+    display: flex; align-items: center; gap: 18px;
+    z-index: 5;
+  }
+  .logo-bar img { height: 26px; display: block; }
+  .logo-bar .div { width: 1px; height: 20px; background: rgba(4,9,45,0.25); }
+  .logo-bar .sec {
+    font-size: 14px; font-weight: 400;
+    color: rgba(4,9,45,0.55);
+  }
+
+  .grad {
+    position: absolute; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.85) 0%, rgba(70,92,238,0) 72%),
+      radial-gradient(55% 55% at 75% 25%, rgba(255,133,154,0.80) 0%, rgba(255,133,154,0) 66%);
+  }
+
+  h2, h3, p { margin: 0; padding: 0; }
+
+  .three-up { min-height: 1080px; }
+  .three-up .grad { width: 900px; height: 620px; right: -250px; top: -200px; opacity: 0.55; }
+
+  .three-up h2 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-top: 64px;
+    max-width: 1500px;
+  }
+  .three-up h2 b { font-weight: 700; }
+  .three-up .sub {
+    font-size: 22px;
+    color: rgba(4,9,45,0.65);
+    margin-top: 20px;
+    max-width: 900px;
+    line-height: 1.45;
+  }
+
+  .three-up .cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-top: 64px;
+  }
+
+  /* Illustration block: 240x240, white card surface, brand-system geometry inside. */
+  .three-up .col .illus {
+    width: 240px;
+    height: 240px;
+    background: #FFFFFF;
+    border-radius: 24px;
+    box-shadow: 0 2px 4px rgba(4,9,45,0.06);
+    border: 1px solid rgba(4,9,45,0.06);
+    margin-bottom: 28px;
+    display: grid;
+    place-items: center;
+  }
+  .three-up .col .illus svg {
+    width: 180px;
+    height: 180px;
+    display: block;
+  }
+
+  .three-up .col .era {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #465CEE;
+    margin-bottom: 14px;
+  }
+  .three-up .col h3 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: #04092D;
+  }
+  .three-up .col p {
+    margin-top: 14px;
+    font-size: 17px;
+    line-height: 1.5;
+    color: rgba(4,9,45,0.72);
+    font-weight: 400;
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <section class="bg-offwhite three-up" data-label="Grateful Dead · illustrated three-up">
+    <div class="grad"></div>
+    <div class="logo-bar">
+      <img src="../design-system/assets/logos/didomi-logo.svg" alt="Didomi"/>
+      <div class="div"></div>
+      <div class="sec">Brand storytelling · The Dead</div>
+    </div>
+
+    <h2>Thirty years. Twenty-three hundred shows.<br/>One band that <b>rewrote the playbook.</b></h2>
+    <p class="sub">The Grateful Dead never had a #1 single. They sold out stadiums for three decades by trusting their audience and giving them more — not less.</p>
+
+    <div class="cols">
+
+      <!-- 1 · The acid years — orbiting circles in different sizes, one accent dot. Echoes Calendar.svg geometry. -->
+      <div class="col">
+        <div class="illus">
+          <svg viewBox="0 0 473 473" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="236.5" cy="236.5" r="180" stroke="#04092D" stroke-width="1.5"/>
+            <circle cx="236.5" cy="236.5" r="130" stroke="#04092D" stroke-width="1.5"/>
+            <circle cx="236.5" cy="236.5" r="80" stroke="#04092D" stroke-width="1.5"/>
+            <circle cx="236.5" cy="236.5" r="30" stroke="#04092D" stroke-width="1.5"/>
+            <!-- orbiting accent dots -->
+            <circle cx="416.5" cy="236.5" r="10" fill="#465CEE"/>
+            <circle cx="236.5" cy="56.5"  r="7" fill="#04092D"/>
+            <circle cx="56.5"  cy="236.5" r="5" fill="#04092D"/>
+            <circle cx="306.5" cy="306.5" r="6" fill="#FF859A"/>
+          </svg>
+        </div>
+        <div class="era">1965 — 1971 · The acid years</div>
+        <h3>Born out of<br/>San Francisco</h3>
+        <p>Formed in Palo Alto as The Warlocks, then renamed Grateful Dead in 1965. House band for Ken Kesey's Acid Tests — the first improvised, unscripted live shows in rock.</p>
+      </div>
+
+      <!-- 2 · The touring machine — stacked / arrayed shapes representing the speaker wall + tape network. -->
+      <div class="col">
+        <div class="illus">
+          <svg viewBox="0 0 473 473" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- speaker stack -->
+            <rect x="80"  y="80"  width="80" height="80"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="80"  y="180" width="80" height="120" rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="80"  y="320" width="80" height="60"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="180" y="80"  width="80" height="120" rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="180" y="220" width="80" height="80"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="180" y="320" width="80" height="60"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="280" y="80"  width="80" height="60"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="280" y="160" width="80" height="120" rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <rect x="280" y="300" width="80" height="80"  rx="8" stroke="#04092D" stroke-width="1.5"/>
+            <!-- driver dots — accent showing live cones -->
+            <circle cx="120" cy="120" r="8" fill="#465CEE"/>
+            <circle cx="320" cy="340" r="8" fill="#465CEE"/>
+            <circle cx="220" cy="260" r="6" fill="#04092D"/>
+          </svg>
+        </div>
+        <div class="era">1972 — 1986 · The touring machine</div>
+        <h3>Wall of Sound +<br/>tape culture</h3>
+        <p>Built the largest concert sound system ever assembled (1974) and openly invited fans to record every show. The "tape trader" Deadhead network turned the live circuit into the product itself.</p>
+      </div>
+
+      <!-- 3 · Mainstream + legacy — concentric arcs (radio waves / broadcast reach) with a single bold dot for "Touch of Grey". -->
+      <div class="col">
+        <div class="illus">
+          <svg viewBox="0 0 473 473" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- broadcast tower base -->
+            <rect x="216" y="280" width="40" height="100" rx="6" stroke="#04092D" stroke-width="1.5"/>
+            <!-- radiating arcs -->
+            <path d="M120 280 Q236 200 352 280" stroke="#04092D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M80  280 Q236 140 392 280" stroke="#04092D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M40  280 Q236 80  432 280" stroke="#04092D" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <!-- top dot (peak / Touch of Grey moment) -->
+            <circle cx="236" cy="220" r="12" fill="#465CEE"/>
+            <!-- listener dots scattered -->
+            <circle cx="100" cy="380" r="6" fill="#04092D"/>
+            <circle cx="180" cy="400" r="5" fill="#04092D"/>
+            <circle cx="280" cy="400" r="5" fill="#04092D"/>
+            <circle cx="360" cy="380" r="6" fill="#04092D"/>
+            <circle cx="60"  cy="360" r="4" fill="#FF859A"/>
+            <circle cx="412" cy="360" r="4" fill="#FF859A"/>
+          </svg>
+        </div>
+        <div class="era">1987 — 1995 · Mainstream + legacy</div>
+        <h3>Touch of Grey<br/>+ the final show</h3>
+        <p>Their only Top 10 single hit in 1987, twenty-two years in. Highest-grossing touring act of the early 1990s. Jerry Garcia's last show: Soldier Field, July 9, 1995.</p>
+      </div>
+
+    </div>
+  </section>
+
+</deck-stage>
+</body>
+</html>
