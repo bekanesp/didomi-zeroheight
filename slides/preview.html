@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Didomi · slide preview</title>
+<link rel="stylesheet" href="../design-system/tokens/colors_and_type.css" />
+<script src="deck-stage.js"></script>
+<style>
+  html, body { margin: 0; background: #000; }
+  deck-stage { font-family: var(--font-sans); }
+
+  section {
+    padding: 80px 100px;
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+  }
+  section > * { position: relative; z-index: 1; }
+
+  .bg-offwhite { background: #F4F3F3; color: #04092D; }
+  .bg-navy     { background: #04092D; color: #F4F3F3; }
+
+  .logo-bar {
+    position: absolute; top: 80px; left: 100px;
+    display: flex; align-items: center; gap: 18px;
+    z-index: 5;
+  }
+  .logo-bar img { height: 26px; display: block; }
+  .logo-bar .div { width: 1px; height: 20px; background: rgba(4,9,45,0.25); }
+  .bg-navy .logo-bar .div { background: rgba(244,243,243,0.25); }
+  .logo-bar .sec {
+    font-size: 14px; font-weight: 400;
+    color: rgba(4,9,45,0.55);
+  }
+  .bg-navy .logo-bar .sec { color: rgba(244,243,243,0.55); }
+
+  .grad {
+    position: absolute; pointer-events: none; z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    background:
+      radial-gradient(60% 60% at 30% 70%, rgba(70,92,238,0.85) 0%, rgba(70,92,238,0) 72%),
+      radial-gradient(55% 55% at 75% 25%, rgba(255,133,154,0.80) 0%, rgba(255,133,154,0) 66%);
+  }
+
+  h1,h2,h3,h4,p,ul,li,blockquote { margin: 0; padding: 0; }
+
+  /* Header strip showing which slide is active — collapses cleanly */
+  .header {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 12px 20px;
+    background: rgba(0,0,0,0.85);
+    color: rgba(255,255,255,0.85);
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 13px;
+    z-index: 2147483647;
+    display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(8px);
+  }
+  .header a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 140ms ease;
+  }
+  .header a:hover { color: #fff; }
+  .header .chip {
+    padding: 2px 10px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  body.embed .header { display: none; }   /* hide chrome when iframe'd into zeroheight */
+</style>
+</head>
+<body>
+  <div class="header">
+    <span><span class="chip" id="slide-label">Slide 1</span></span>
+    <a href="templates.html">↗ full deck</a>
+  </div>
+
+  <deck-stage width="1920" height="1080">
+    <!-- Imported from templates.html — one section per template, IDs match the ?slide= param -->
+    <!-- IMPORTANT: keep this synced with templates.html. Run `node tools/sync-preview-slides.mjs` if it falls out of date. -->
+    <section class="bg-navy cover" data-label="Cover · Navy" id="s1">
+      <div class="grad" style="width:900px;height:700px;right:-200px;bottom:-200px;"></div>
+      <div class="logo-bar">
+        <img src="../design-system/assets/logos/didomi-logo-white.svg" alt="Didomi"/>
+      </div>
+      <h1 style="font-family:var(--font-display);font-weight:700;font-size:80px;line-height:1.05;letter-spacing:-0.02em;color:#F4F3F3;max-width:1200px;margin-top:auto;">Lorem ipsum dolor</h1>
+      <div style="font-size:28px;color:rgba(244,243,243,0.8);margin-top:16px;margin-bottom:160px;">Lorem ipsum dolor</div>
+    </section>
+  </deck-stage>
+
+  <script>
+    // Read ?slide=N from URL and load that slide from templates.html into the deck-stage.
+    // This is the single-slide iframe target for Zeroheight pages.
+    (async function () {
+      const params = new URLSearchParams(location.search);
+      const slideNum = Math.max(1, Math.min(8, parseInt(params.get('slide') || '1', 10)));
+      const embed = params.get('embed') === '1' || params.get('embed') === 'true';
+      if (embed) document.body.classList.add('embed');
+
+      // Fetch templates.html, extract the Nth <section>, swap into deck-stage.
+      try {
+        const res = await fetch('templates.html');
+        const text = await res.text();
+        // Parse out the body content
+        const dom = new DOMParser().parseFromString(text, 'text/html');
+        const sections = dom.querySelectorAll('deck-stage > section');
+        if (sections.length === 0) throw new Error('No sections found in templates.html');
+
+        const target = sections[slideNum - 1] || sections[0];
+        const stage = document.querySelector('deck-stage');
+        stage.innerHTML = '';
+        stage.appendChild(target.cloneNode(true));
+
+        // Update the chrome chip
+        const label = target.getAttribute('data-label') || `Slide ${slideNum}`;
+        document.getElementById('slide-label').textContent = `${slideNum} · ${label}`;
+        document.title = `Didomi · ${label}`;
+
+        // Re-execute any inline scripts inside the cloned section (e.g. the 5×5 hand grid for slide 3).
+        // The parser doesn't run scripts auto-cloned via cloneNode + appendChild, so we replicate manually.
+        const inserted = stage.firstElementChild;
+        inserted.querySelectorAll('script').forEach((oldS) => {
+          if (oldS.src) return; // external scripts already loaded
+          const newS = document.createElement('script');
+          newS.textContent = oldS.textContent;
+          oldS.parentNode.replaceChild(newS, oldS);
+        });
+
+        // The 5×5 hand grid on slide 3 is generated by an IIFE that runs once on page load.
+        // It targets `.stat-slide .grid-vis`. Force-run it now if we landed on slide 3.
+        if (inserted.classList.contains('stat-slide')) {
+          const grid = inserted.querySelector('.grid-vis');
+          if (grid && grid.children.length === 0) {
+            const lit = new Set([0,3,7,11,20]);
+            for (let i = 0; i < 25; i++) {
+              const dim = !lit.has(i);
+              grid.insertAdjacentHTML('beforeend',
+                `<svg class="hand ${dim?'dim':''}" viewBox="0 0 100 110" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M30 62 V30 a6 6 0 0 1 12 0 V58"/>
+                  <path d="M42 58 V22 a6 6 0 0 1 12 0 V58"/>
+                  <path d="M54 58 V24 a6 6 0 0 1 12 0 V60"/>
+                  <path d="M66 60 V32 a6 6 0 0 1 12 0 V68"/>
+                  <path d="M30 50 q-6 -2 -10 6 l0 14 q0 14 10 22 q8 6 18 6 h10 q12 0 20 -10 l10 -22 V56 a5 5 0 0 0 -10 0"/>
+                </svg>`);
+            }
+          }
+        }
+      } catch (err) {
+        console.error('preview load failed:', err);
+        document.body.innerHTML = `<pre style="color:#fff;padding:40px;font-family:monospace;">preview load failed:\n${err.message}\n\ntemplates.html may not be at the expected sibling path.</pre>`;
+      }
+    })();
+  </script>
+</body>
+</html>
